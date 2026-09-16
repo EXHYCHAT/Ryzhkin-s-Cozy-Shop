@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Allow: /Входная%20группа/
+Allow: /Кулинария/
+Allow: /Алкоголь/
+Allow: /Gonzo/
+
+Sitemap: https://github.io
