@@ -9,4 +9,4 @@ Allow: /Входная%20группа/
 Allow: /Кулинария/
 Allow: /Алкоголь/
 Allow: /Gonzo/
-Sitemap: https://github.io
+Sitemap: https://exhychat.github.io/sitemap.xml
