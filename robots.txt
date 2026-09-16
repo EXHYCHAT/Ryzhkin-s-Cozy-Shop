@@ -1,8 +1,12 @@
 User-agent: *
+Disallow: /*?
+Disallow: /index.html
+Disallow: /search
+Disallow: /cabinet
+Disallow: /cart
 Allow: /
 Allow: /Входная%20группа/
 Allow: /Кулинария/
 Allow: /Алкоголь/
 Allow: /Gonzo/
-
 Sitemap: https://github.io
