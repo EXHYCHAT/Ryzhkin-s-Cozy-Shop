@@ -3,58 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 — Страница потерялась в Нижнем</title>
+    <title>404 — Страница не найдена</title>
+    <!-- Правильное подключение пиксельного шрифта -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 10% 5%;
-            background-color: #1a1a1a;
-            color: #ffffff;
-            line-height: 1.6;
+        /* Белый фон и базовые сбросы как на странице категорий */
+        body { background: #ffffff; color: #000000; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 0; height: 100vh; display: flex; flex-direction: column; overflow: hidden; -webkit-font-smoothing: antialiased; }
+        main { flex: 1; display: flex; justify-content: center; align-items: center; text-align: center; padding: 40px; position: relative; }
+        
+        .error-container { display: flex; flex-direction: column; gap: 40px; align-items: center; max-width: 800px; }
+        
+        /* Главный пиксельный заголовок 404 */
+        .error-code {
+            font-family: 'Press Start 2P', monospace; font-size: 80px; line-height: 1; color: #ffffff; text-transform: uppercase; user-select: none; margin: 0; transform: skewX(-10deg); letter-spacing: -4px;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px 2px 0 #000, -3px 3px 0 #000, -4px 4px 0 #000, -5px 5px 0 #000, -6px 6px 0 #000, -7px 7px 0 #000, -8px 8px 0 #000, -9px 9px 0 #000, -10px 10px 15px rgba(0,0,0,0.5);
+            animation: quakePulse 2s infinite ease-in-out;
         }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
+        
+        /* Текстовое описание в стиле лего */
+        .error-text {
+            font-family: 'Press Start 2P', monospace; font-size: 16px; line-height: 1.8; color: #ffffff; text-transform: uppercase; user-select: none; margin: 0 20px; transform: skewX(-10deg); letter-spacing: -1px;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px 2px 0 #000, -3px 3px 0 #000, -4px 4px 0 #000, -5px 5px 0 #000, -6px 6px 0 #000, -7px 7px 0 #000, -8px 8px 0 #000, -9px 9px 0 #000, -10px 10px 15px rgba(0,0,0,0.5);
+            animation: quakePulse 2s infinite ease-in-out;
         }
-        h1 {
-            font-size: 80px;
-            margin: 0;
-            color: #ff4a4a;
-            letter-spacing: 5px;
+        
+        /* Фирменная интерактивная кнопка-рамка */
+        .menu-link { text-decoration: none; display: inline-block; }
+        .frame-wrapper { padding: 25px 50px; min-width: 400px; background: #ffffff; border: 4px solid #000000; box-shadow: 0 0 0 4px #ffffff, 0 20px 40px rgba(0,0,0,0.08); border-radius: 2px; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .menu-link:hover .frame-wrapper { transform: scale(1.02) skewX(-10deg); box-shadow: 0 0 0 4px #ffffff, 0 25px 50px rgba(0,0,0,0.15); }
+        
+        .btn-text {
+            font-family: 'Press Start 2P', monospace; font-size: 18px; line-height: 1.3; color: #ffffff; text-transform: uppercase; user-select: none; margin: 0; transform: skewX(-10deg); letter-spacing: -1px;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px 2px 0 #000, -3px 3px 0 #000, -4px 4px 0 #000, -5px 5px 0 #000, -6px 6px 0 #000, -7px 7px 0 #000, -8px 8px 0 #000, -9px 9px 0 #000, -10px 10px 15px rgba(0,0,0,0.5);
+            animation: quakePulse 2s infinite ease-in-out;
         }
-        h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            font-weight: normal;
-        }
-        p {
-            font-size: 16px;
-            color: #cccccc;
-            margin-bottom: 40px;
-        }
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background-color: #ffffff;
-            color: #1a1a1a;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 4px;
-            transition: background 0.3s;
-        }
-        .btn:hover {
-            background-color: #ff4a4a;
-            color: #ffffff;
+
+        /* Общая анимация пульсации тени для всех элементов */
+        @keyframes quakePulse {
+            0%, 100% { color: #ffffff; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px 2px 0 #000, -4px 4px 0 #000, -6px 6px 0 #000, -8px 8px 0 #000, -10px 10px 15px rgba(0,0,0,0.4); }
+            50% { color: #e5e5e5; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px 2px 0 #000, -5px 5px 0 #333, -8px 8px 0 #111, -11px 11px 20px rgba(0,0,0,0.6); }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>404</h1>
-        <h2>Здесь ничего нет. Возможно, эту страницу кто-то выпил.</h2>
-        <p>Маршрут построил куда-то не туда. Либо ссылка устарела, либо вкралась опечатка, либо это чистый гонзо-эффект. Самое время вернуться в безопасную гавань.</p>
-        <a href="https://urealismo.ru/" class="btn">На главную Лавки</a>
-    </div>
+    <main>
+        <div class="error-container">
+            <!-- Код ошибки -->
+            <h1 class="error-code">404</h1>
+            
+            <!-- Ваш текст, адаптированный под шрифт лего -->
+            <p class="error-text">Увы, но по этому адресу<br>ничего нет!<br>Не переживай, сайт жив и здоров.</p>
+            
+            <!-- Интерактивная кнопка возврата -->
+            <a href="/" class="menu-link">
+                <div class="frame-wrapper">
+                    <h2 class="btn-text">Вернуться в Уютную Лавку Рыжкина</h2>
+                </div>
+            </a>
+        </div>
+    </main>
 </body>
 </html>
