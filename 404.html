@@ -2,24 +2,59 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Страница не найдена — 404</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Страница потерялась в Нижнем</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: Arial, sans-serif;
             text-align: center;
-            padding: 50px;
-            background-color: #f9f9f9;
-            color: #333;
+            padding: 10% 5%;
+            background-color: #1a1a1a;
+            color: #ffffff;
+            line-height: 1.6;
         }
-        h1 { font-size: 50px; margin-bottom: 10px; }
-        p { font-size: 20px; color: #666; }
-        a { color: #0076ff; text-decoration: none; font-weight: bold; }
-        a:hover { text-underline-position: under; text-decoration: underline; }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 80px;
+            margin: 0;
+            color: #ff4a4a;
+            letter-spacing: 5px;
+        }
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: normal;
+        }
+        p {
+            font-size: 16px;
+            color: #cccccc;
+            margin-bottom: 40px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background-color: #ff4a4a;
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
-    <h1>404</h1>
-    <p>Упс! Страница, которую вы ищете, не существует или переехала.</p>
-    <p><a href="/">Вернуться на главную страницу</a></p>
+    <div class="container">
+        <h1>404</h1>
+        <h2>Здесь ничего нет. Возможно, эту страницу кто-то выпил.</h2>
+        <p>Маршрут построил куда-то не туда. Либо ссылка устарела, либо вкралась опечатка, либо это чистый гонзо-эффект. Самое время вернуться в безопасную гавань.</p>
+        <a href="https://urealismo.ru/" class="btn">На главную Лавки</a>
+    </div>
 </body>
 </html>
