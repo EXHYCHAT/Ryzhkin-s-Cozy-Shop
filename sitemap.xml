@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://sitemaps.org">
     <url>
-        <loc>https://urealismo.ru</loc>
+        <loc>https://urealismo.ru/</loc>
         <lastmod>2026-09-21</lastmod>
-        <changefreq>daily</changefreq>
+        <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
@@ -13,51 +13,69 @@
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://urealismo.ru/vhodnaya-gruppa/kulinariya/</loc>
+        <loc>https://urealismo.ru/vhodnaya-gruppa/kotiki/</loc>
         <lastmod>2026-09-21</lastmod>
         <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://urealismo.ru/vhodnaya-gruppa/kulinariya/</loc>
+        <lastmod>2026-09-21</lastmod>
+        <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>https://urealismo.ru/vhodnaya-gruppa/kulinariya/lichnye-recepty/</loc>
         <lastmod>2026-09-21</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://urealismo.ru/vhodnaya-gruppa/kulinariya/obzory/</loc>
         <lastmod>2026-09-21</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
     </url>
     <url>
         <loc>https://urealismo.ru/vhodnaya-gruppa/alkogol/</loc>
         <lastmod>2026-09-21</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>0.9</priority>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://urealismo.ru/vhodnaya-gruppa/alkogol/pro-pivo/</loc>
         <lastmod>2026-09-21</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
     </url>
     <url>
         <loc>https://urealismo.ru/vhodnaya-gruppa/alkogol/pro-koktejli/</loc>
         <lastmod>2026-09-21</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
     </url>
     <url>
         <loc>https://urealismo.ru/vhodnaya-gruppa/alkogol/pro-ostalnoe/</loc>
         <lastmod>2026-09-21</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
     </url>
     <url>
         <loc>https://urealismo.ru/vhodnaya-gruppa/gonzo/</loc>
         <lastmod>2026-09-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://urealismo.ru/about/</loc>
+        <lastmod>2026-09-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://urealismo.ru/privacy/</loc>
+        <lastmod>2026-09-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
     </url>
 </urlset>
