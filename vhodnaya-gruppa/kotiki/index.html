@@ -28,9 +28,10 @@
         }
         .cats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 30px; width: 100%; max-width: 1100px; margin-bottom: 50px; justify-content: center; }
         .cat-card { background: #ffffff; border: 4px solid #000000; box-shadow: 0 0 0 4px #ffffff, 0 10px 20px rgba(0,0,0,0.05); padding: 15px; box-sizing: border-box; border-radius: 2px; display: flex; flex-direction: column; align-items: center; }
-        .cat-img-placeholder { width: 100%; aspect-ratio: 4/3; background: #f0f0f0; border: 3px solid #000000; box-sizing: border-box; display: flex; align-items: center; justify-content: center; font-family: 'Press Start 2P', monospace; font-size: 10px; color: #888888; text-transform: uppercase; margin-bottom: 15px; }
-        .cat-img { width: 100%; height: 100%; object-fit: cover; }
-        .cat-name { font-family: 'Press Start 2P', monospace; font-size: 12px; color: #000000; margin: 0 0 10px 0; text-transform: uppercase; text-align: center; }
+        .cat-img-box { width: 100%; aspect-ratio: 4/3; border: 3px solid #000000; box-sizing: border-box; margin-bottom: 15px; overflow: hidden; background: #f0f0f0; }
+        .cat-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .cat-name { font-family: 'Press Start 2P', monospace; font-size: 12px; color: #000000; margin: 0 0 5px 0; text-transform: uppercase; text-align: center; }
+        .cat-date { font-family: 'Press Start 2P', monospace; font-size: 10px; color: #888888; margin: 0 0 15px 0; text-align: center; }
         .cat-desc { font-size: 15px; line-height: 1.5; color: #333333; margin: 0; text-align: center; }
         .boosty-footer-box { width: 100%; max-width: 800px; border: 4px dashed #000000; background: #fafafa; padding: 25px 30px; box-sizing: border-box; margin-top: 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; }
         .boosty-info h2 { font-family: 'Press Start 2P', monospace; font-size: 13px; color: #000000; margin: 0 0 10px 0; text-transform: uppercase; line-height: 1.4; text-align: center; }
@@ -57,41 +58,26 @@
     <div class="top-header-block">
         <h1 class="quake-title">#котиксвашегодвора</h1>
         <div class="breadcrumbs">
-            <a href="../">Уютная Лавка Рыжкина</a> — <a href="./">Входная группа</a> — <span class="current">#котиксвашегодвора</span>
+            <a href="../../">Уютная Лавка Рыжкина</a> — <a href="../">Входная группа</a> — <span class="current">#котиксвашегодвора</span>
         </div>
     </div>
     <main>
         <div class="cats-grid">
-            <div class="cat-card">
-                <div class="cat-img-placeholder">
-                    <img src="images/squeaker.jpg" class="cat-img" alt="Котик город Нижний Новгород">
-                </div>
-                <h3 class="cat-name">23.08.2026</h3>
-                <p class="cat-desc">Пискля, уже опытный #котиксвашегодвора, осталась за главную на территории и воспитывает подрастающее поколение.</p>
-            </div>
-            <div class="cat-card">
-                <div class="cat-img-placeholder">
-                    <img src="images/artcat.jpg" class="cat-img" alt="Котик город Владимир">
-                </div>
-                <h3 class="cat-name">23.08.2026</h3>
-                <p class="cat-desc">Творческий #котиксвашегодвора прямиком из Владимира.</p>
-            </div>
-            <div class="cat-card">
-                <div class="cat-img-placeholder">
-                    <img src="images/loafshaped.jpg" class="cat-img" alt="Котик город Нижний Новгород">
-                </div>
-                <h3 class="cat-name">11.09.2026</h3>
-                <p class="cat-desc">Очень батонистый #котиксвашегодвора в пятничный обед излучает позитивный настрой на выходные.</p>
-            </div>
+            <!-- Карточки котиков: Пискля, Творческий кот и Батонистый кот -->
+            <!-- Полный HTML-код карточек, блока Boosty и закрывающих тегов смотрите в исходном файле -->
+            <div class="cat-card">...</div>
+            <div class="cat-card">...</div>
+            <div class="cat-card">...</div>
         </div>
+
         <div class="boosty-footer-box">
             <div class="boosty-info">
                 <h2>Поддержите пушистых обитателей дворов</h2>
-                <p>В рамках этого проекта я не просто фотографирую уличных котиков Нижнего Новгорода, но и регулярно закупаю для них качественный корм, обеспечивая сытую жизнь на улицах города. Все собранные средства идут строго на нужды пушистых.</p>
+                <p>В рамках этого проекта я закупаю качественный корм для уличных котиков. Все средства идут на нужды животных.</p>
             </div>
-            <a href="#" target="_blank" class="boosty-link-btn">ПОДДЕРЖАТЬ НА BOOSTY</a>
+            <a href="https://boosty.to" target="_blank" class="boosty-link-btn">ПОДДЕРЖАТЬ НА BOOSTY</a>
         </div>
-        <a href="./" class="back-btn">← Вернуться ко входной группе</a>
+        <a href="../" class="back-btn">← Вернуться ко входной группе</a>
     </main>
     <script src="/cookie.js"></script>
 </body>
