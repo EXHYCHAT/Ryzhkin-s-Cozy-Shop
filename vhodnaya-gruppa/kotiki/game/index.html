@@ -32,17 +32,17 @@
 
     .game-overlay {
         position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(255, 255, 255, 0.9); z-index: 10;
+        background: rgba(255, 255, 255, 0.95); z-index: 10;
         display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;
     }
-    .game-overlay h2 { font-family: 'Press Start 2P', monospace; font-size: 14px; text-transform: uppercase; margin-bottom: 20px; }
+    .game-overlay h2 { font-family: 'Press Start 2P', monospace; font-size: 14px; text-transform: uppercase; margin-bottom: 20px; text-align: center; }
     
     .pixel-input {
         font-family: 'Press Start 2P', monospace; font-size: 11px; padding: 10px; border: 4px solid #000000; outline: none; margin-bottom: 20px; width: 80%; max-width: 300px; text-align: center;
     }
     
     .pixel-btn {
-        background: #000000; color: #ffffff; border: 4px solid #000000; padding: 12px 24px; font-family: 'Press Start 2P', monospace; font-size: 11px; text-transform: uppercase; cursor: pointer; transition: transform 0.1s;
+        background: #000000; color: #ffffff; border: 4px solid #000000; padding: 12px 24px; font-family: 'Press Start 2P', monospace; font-size: 10px; text-transform: uppercase; cursor: pointer; transition: transform 0.1s; margin: 5px;
     }
     .pixel-btn:hover { background: #ffffff; color: #000000; transform: skewX(-5deg); }
 
@@ -86,8 +86,11 @@
 
             <div class="game-overlay hidden" id="endScreen">
                 <h2>БАМС! Препятствие!</h2>
-                <p style="font-family:'Press Start 2P'; font-size:11px; margin-bottom:20px;">Ваш счёт: <span id="finalScore">0</span></p>
-                <button class="pixel-btn" id="restartBtn">ПОВТОРИТЬ</button>
+                <p style="font-family:'Press Start 2P'; font-size:11px; margin-bottom:20px; text-align:center;">Ваш счёт: <span id="finalScore">0</span></p>
+                <div style="display:flex; flex-direction:row; justify-content:center; width:100%; flex-wrap:wrap;">
+                    <button class="pixel-btn" id="saveOnlyBtn">СОХРАНИТЬ</button>
+                    <button class="pixel-btn" id="saveAndRestartBtn">ЗАНЕВО</button>
+                </div>
             </div>
         </div>
         <p style="font-size: 13px; color: #666; margin-top: 10px;">Нажимайте <b>Пробел</b>, <b>Вверх</b> или кликайте по экрану для прыжка.</p>
@@ -111,7 +114,8 @@
     const startScreen = document.getElementById('startScreen');
     const endScreen = document.getElementById('endScreen');
     const startBtn = document.getElementById('startBtn');
-    const restartBtn = document.getElementById('restartBtn');
+    const saveOnlyBtn = document.getElementById('saveOnlyBtn');
+    const saveAndRestartBtn = document.getElementById('saveAndRestartBtn');
     const playerNameInput = document.getElementById('playerName');
     const leaderboardList = document.getElementById('leaderboardList');
 
@@ -131,7 +135,6 @@
         script.src = SCRIPT_URL + "?callback=renderLeaderboard&t=" + new Date().getTime();
         
         script.onerror = function() {
-            // Если таблица абсолютно пустая, выводим заглушку вместо падения в ошибку
             leaderboardList.innerHTML = `<li style="color:#888; text-align:center;">Пока нет рекордов</li>`;
         };
         document.body.appendChild(script);
@@ -150,25 +153,31 @@
         list.forEach((item, index) => {
             const li = document.createElement('li');
             li.className = 'leaderboard-item';
-            li.innerHTML = `<div><span class="rank">#${index+1}</span> ${item[0]}</div><div>${item[1]}</div>`;
+            li.innerHTML = `<div><span class="rank">#${index+1}</span> ${item}</div><div>${item}</div>`;
             leaderboardList.appendChild(li);
         });
     };
 
-    function submitScore(name, finalScoreVal) {
-        // Безопасный кросс-доменный запрос без проверки CORS политик браузера
+    function submitScore(name, finalScoreVal, callbackAfterSubmit) {
+        const params = new URLSearchParams();
+        params.append('name', name);
+        params.append('score', finalScoreVal);
+
         fetch(SCRIPT_URL, {
             method: 'POST',
             mode: 'no-cors',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
-            body: JSON.stringify({ name: name, score: finalScoreVal })
+            body: params.toString()
         }).then(() => {
-            // Запрашиваем обновление ТОП-10 спустя секунду
-            setTimeout(fetchLeaderboard, 1200);
+            setTimeout(() => {
+                fetchLeaderboard();
+                if (callbackAfterSubmit) callbackAfterSubmit();
+            }, 1000);
         }).catch(err => {
-            console.error("Ошибка сети при отправке:", err);
+            console.error(err);
+            if (callbackAfterSubmit) callbackAfterSubmit();
         });
     }
 
@@ -248,23 +257,47 @@
         setTimeout(() => {
             finalScore.textContent = score;
             endScreen.classList.remove('hidden');
-            submitScore(playerName, score);
         }, 1000);
+    }
+
+    function resetField() {
+        score = 0;
+        scoreVal.textContent = score;
+        if(currentObstacle) currentObstacle.remove();
+        document.querySelectorAll('.obstacle').forEach(o => o.remove());
     }
 
     function startGame() {
         playerName = playerNameInput.value.trim() || "Кот Без Имени";
         startScreen.classList.add('hidden');
         endScreen.classList.add('hidden');
-        
-        score = 0;
-        scoreVal.textContent = score;
-        if(currentObstacle) currentObstacle.remove();
-        document.querySelectorAll('.obstacle').forEach(o => o.remove());
-        
+        resetField();
         isPlaying = true;
         createObstacle();
     }
+
+    saveOnlyBtn.addEventListener('click', () => {
+        saveOnlyBtn.innerText = "ОТПРАВКА...";
+        saveOnlyBtn.disabled = true;
+        submitScore(playerName, score, () => {
+            saveOnlyBtn.innerText = "СОХРАНЕНО";
+        });
+    });
+
+    saveAndRestartBtn.addEventListener('click', () => {
+        saveAndRestartBtn.innerText = "ОТПРАВКА...";
+        saveAndRestartBtn.disabled = true;
+        submitScore(playerName, score, () => {
+            saveAndRestartBtn.innerText = "ЗАНЕВО";
+            saveAndRestartBtn.disabled = false;
+            saveOnlyBtn.innerText = "СОХРАНИТЬ";
+            saveOnlyBtn.disabled = false;
+            endScreen.classList.add('hidden');
+            resetField();
+            isPlaying = true;
+            createObstacle();
+        });
+    });
 
     document.addEventListener('keydown', (e) => {
         if (e.code === 'Space' || e.code === 'ArrowUp') {
@@ -273,7 +306,5 @@
         }
     });
     gameContainer.addEventListener('click', jump);
-
     startBtn.addEventListener('click', startGame);
-    restartBtn.addEventListener('click', startGame);
 </script>
