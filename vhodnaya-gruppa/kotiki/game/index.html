@@ -122,19 +122,42 @@
     let currentObstacle = null;
     let playerName = "";
 
-    async function fetchLeaderboard() {
-        try {
-            let response = await fetch(SCRIPT_URL);
-            let data = await response.json();
-            renderLeaderboard(data.leaderboard);
-        } catch (e) {
+    const hiddenIframe = document.createElement('iframe');
+    hiddenIframe.name = 'hidden_iframe';
+    hiddenIframe.style.display = 'none';
+    document.body.appendChild(hiddenIframe);
+
+    const hiddenForm = document.createElement('form');
+    hiddenForm.method = 'POST';
+    hiddenForm.action = SCRIPT_URL;
+    hiddenForm.target = 'hidden_iframe';
+    hiddenForm.style.display = 'none';
+    
+    const formInput = document.createElement('input');
+    formInput.name = 'myData';
+    hiddenForm.appendChild(formInput);
+    document.body.appendChild(hiddenForm);
+
+    function fetchLeaderboard() {
+        const oldScript = document.getElementById('jsonp-leaderboard');
+        if (oldScript) oldScript.remove();
+
+        const script = document.createElement('script');
+        script.id = 'jsonp-leaderboard';
+        script.src = SCRIPT_URL + "?callback=renderLeaderboard&t=" + new Date().getTime();
+        
+        script.onerror = function() {
             leaderboardList.innerHTML = `<li style="color:red; text-align:center;">Ошибка сети</li>`;
-        }
+        };
+        document.body.appendChild(script);
     }
+    
     fetchLeaderboard();
 
-    function renderLeaderboard(list) {
+    window.renderLeaderboard = function(data) {
         leaderboardList.innerHTML = "";
+        const list = data.leaderboard;
+        
         if (!list || list.length === 0) {
             leaderboardList.innerHTML = `<li style="color:#888; text-align:center;">Никто еще не бегал</li>`;
             return;
@@ -145,17 +168,12 @@
             li.innerHTML = `<div><span class="rank">#${index+1}</span> ${item[0]}</div><div>${item[1]}</div>`;
             leaderboardList.appendChild(li);
         });
-    }
+    };
 
-    async function submitScore(name, finalScoreVal) {
-        try {
-            let response = await fetch(SCRIPT_URL, {
-                method: 'POST',
-                body: JSON.stringify({ name: name, score: finalScoreVal })
-            });
-            let data = await response.json();
-            if(data.status === "success") renderLeaderboard(data.leaderboard);
-        } catch (e) { console.error(e); }
+    function submitScore(name, finalScoreVal) {
+        formInput.value = JSON.stringify({ name: name, score: finalScoreVal });
+        hiddenForm.submit();
+        setTimeout(fetchLeaderboard, 1500);
     }
 
     function jump() {
