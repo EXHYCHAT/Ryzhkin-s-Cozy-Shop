@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function() {
         banner.className = 'cookie-banner';
         banner.id = 'cookieBanner';
         banner.innerHTML = `
-            <p class="cookie-text">МЫ ИСПОЛЬЗУЕМ COOKIE ДЛЯ АНАЛИТИКИ И РЕКЛАМЫ. ОСТАВАЯСЬ НА САЙТЕ, ВЫ СОГЛАШАЕТЕСЬ С <a href="/privacy/">ПОЛИТИКОЙ</a>.</p>
+            <p class="cookie-text">МЫ ИСПОЛЬЗУЕМ COOKIE ДЛЯ АНАЛИТИКИ И РЕКЛАМЫ. ОСТАВАЯСЬ НА САЙТЕ, ВЫ СОГЛАШАЕТЕСЬ С <a href="/privacy/">ПОЛИТИКОЙ КОНФИДЕНЦИАЛЬНОСТИ</a>.</p>
             <button class="cookie-btn" onclick="acceptCookies()">ОК</button>
         `;
         document.body.appendChild(banner);
