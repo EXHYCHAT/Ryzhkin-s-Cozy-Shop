@@ -17,4 +17,5 @@ User-agent: YandexAdditional
 Allow: /
 Allow: /llms.txt
 
+# LLM file: https://urealismo.ru/llms.txt
 Sitemap: https://urealismo.ru/sitemap.xml
