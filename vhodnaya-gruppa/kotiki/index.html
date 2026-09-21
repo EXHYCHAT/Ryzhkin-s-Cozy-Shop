@@ -209,7 +209,6 @@
     </div>
 </div>
 
-<!-- Вывеска перенесена сюда и освобождена от центрирования -->
 <div class="signboard-holder">
     <div id="dragGameBtn" class="draggable-game-btn">
         <h2 class="btn-text">Дворовой Забег</h2>
@@ -222,7 +221,7 @@
             <h2>Поддержите пушистых обитателей дворов</h2>
             <p>В рамках этого проекта я не просто фотографирую уличных котиков, но и регулярно закупаю для них качественный корм, обеспечивая сытую жизнь на улицах города. Все собранные средства идут строго на нужды пушистых.</p>
         </div>
-        <a href="https://boosty.to" target="_blank" class="boosty-link-btn">ПОДДЕРЖАТЬ НА BOOSTY</a>
+        <a href="https://boosty.to/kotiksvashegodvora" target="_blank" class="boosty-link-btn">ПОДДЕРЖАТЬ НА BOOSTY</a>
     </div>
 
     <div class="cats-grid">
@@ -259,119 +258,69 @@
 
     <a href="../" class="back-btn">← Вернуться ко входной группе</a>
 </main>
-<script>
-    const dragBtn = document.getElementById('dragGameBtn');
-    const holder = dragBtn.parentElement;
-    
-    const lightbox = document.getElementById('catLightbox');
-    const lightboxImg = document.getElementById('lightboxImg');
-    const lightboxClose = document.getElementById('lightboxClose');
-    const catImgBoxes = document.querySelectorAll('.cat-img-box');
-    
-    let isDragging = false;
-    let startX, startY;
-    let btnLeft, btnTop;
-    let startTime;
-    const moveThreshold = 6; 
+        <script>
+        const dragBtn = document.getElementById('dragGameBtn');
+        const holder = dragBtn.parentElement;
+        const lightbox = document.getElementById('catLightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const catImgBoxes = document.querySelectorAll('.cat-img-box');
+        let isDragging = false, startX, startY, btnLeft, btnTop, startTime;
+        const moveThreshold = 6; 
 
-    function startDrag(e) {
-        if (window.innerWidth <= 768) return;
-        if (e.type === 'mousedown' && e.button !== 0) return;
-        
-        isDragging = false;
-        startTime = new Date().getTime();
-        
-        const clientX = e.type === 'touchstart' ? e.touches.clientX : e.clientX;
-        const clientY = e.type === 'touchstart' ? e.touches.clientY : e.clientY;
-        
-        startX = clientX;
-        startY = clientY;
-        
-        const rect = holder.getBoundingClientRect();
-        btnLeft = rect.left;
-        btnTop = rect.top;
-        
-        holder.style.animation = 'none';
-        holder.style.transform = 'none';
-        
-        holder.style.position = 'fixed';
-        holder.style.bottom = 'auto';
-        holder.style.right = 'auto';
-        holder.style.left = btnLeft + 'px';
-        holder.style.top = btnTop + 'px';
-        
-        if (e.type === 'mousedown') {
-            document.addEventListener('mousemove', moveDrag);
-            document.addEventListener('mouseup', endDrag);
-        } else {
-            document.addEventListener('touchmove', moveDrag, { passive: false });
-            document.addEventListener('touchend', endDrag);
+        function checkMobileLayout() { if (window.innerWidth <= 768) { holder.removeAttribute('style'); dragBtn.removeAttribute('style'); } }
+        window.addEventListener('resize', checkMobileLayout);
+        window.addEventListener('load', checkMobileLayout);
+
+        function startDrag(e) {
+            if (window.innerWidth <= 768) return;
+            if (e.type === 'mousedown' && e.button !== 0) return;
+            isDragging = false; startTime = new Date().getTime();
+            const clientX = e.type === 'touchstart' ? e.touches.clientX : e.clientX;
+            const clientY = e.type === 'touchstart' ? e.touches.clientY : e.clientY;
+            startX = clientX; startY = clientY;
+            const rect = holder.getBoundingClientRect();
+            btnLeft = rect.left; btnTop = rect.top;
+            holder.style.animation = 'none'; holder.style.transform = 'none';
+            holder.style.position = 'fixed'; holder.style.bottom = 'auto'; holder.style.right = 'auto';
+            holder.style.left = btnLeft + 'px'; holder.style.top = btnTop + 'px';
+            if (e.type === 'mousedown') { document.addEventListener('mousemove', moveDrag); document.addEventListener('mouseup', endDrag); }
+            else { document.addEventListener('touchmove', moveDrag, { passive: false }); document.addEventListener('touchend', endDrag); }
         }
-    }
 
-    function moveDrag(e) {
-        const clientX = e.type === 'touchmove' ? e.touches.clientX : e.clientX;
-        const clientY = e.type === 'touchmove' ? e.touches.clientY : e.clientY;
-        
-        const deltaX = clientX - startX;
-        const deltaY = clientY - startY;
-        
-        if (Math.abs(deltaX) > moveThreshold || Math.abs(deltaY) > moveThreshold) {
-            isDragging = true;
+        function moveDrag(e) {
+            if (window.innerWidth <= 768) return;
+            const clientX = e.type === 'touchmove' ? e.touches.clientX : e.clientX;
+            const clientY = e.type === 'touchmove' ? e.touches.clientY : e.clientY;
+            const deltaX = clientX - startX, deltaY = clientY - startY;
+            if (Math.abs(deltaX) > moveThreshold || Math.abs(deltaY) > moveThreshold) { isDragging = true; }
+            if (isDragging) {
+                if (e.cancelable) e.preventDefault();
+                let newLeft = btnLeft + deltaX, newTop = btnTop + deltaY;
+                const maxLeft = window.innerWidth - holder.offsetWidth, maxTop = window.innerHeight - holder.offsetHeight;
+                if (newLeft < 0) newLeft = 0; if (newLeft > maxLeft) newLeft = maxLeft;
+                if (newTop < 0) newTop = 0; if (newTop > maxTop) newTop = maxTop;
+                holder.style.left = newLeft + 'px'; holder.style.top = newTop + 'px';
+            }
         }
-        
-        if (isDragging) {
-            if (e.cancelable) e.preventDefault();
-            
-            let newLeft = btnLeft + deltaX;
-            let newTop = btnTop + deltaY;
-            
-            const maxLeft = window.innerWidth - holder.offsetWidth;
-            const maxTop = window.innerHeight - holder.offsetHeight;
-            
-            if (newLeft < 0) newLeft = 0;
-            if (newLeft > maxLeft) newLeft = maxLeft;
-            if (newTop < 0) newTop = 0;
-            if (newTop > maxTop) newTop = maxTop;
-            
-            holder.style.left = newLeft + 'px';
-            holder.style.top = newTop + 'px';
+
+        function endDrag(e) {
+            document.removeEventListener('mousemove', moveDrag); document.removeEventListener('mouseup', endDrag);
+            document.removeEventListener('touchmove', moveDrag); document.removeEventListener('touchend', endDrag);
+            const duration = new Date().getTime() - startTime;
+            if (!isDragging && duration < 300) { window.location.href = 'game/'; }
         }
-    }
 
-    function endDrag(e) {
-        document.removeEventListener('mousemove', moveDrag);
-        document.removeEventListener('mouseup', endDrag);
-        document.removeEventListener('touchmove', moveDrag);
-        document.removeEventListener('touchend', endDrag);
+        dragBtn.addEventListener('mousedown', startDrag);
         
-        const endTime = new Date().getTime();
-        const duration = endTime - startTime;
-        
-        if (!isDragging && duration < 300) {
-            window.location.href = 'game/';
-        }
-    }
-
-    dragBtn.addEventListener('mousedown', startDrag);
-    dragBtn.addEventListener('touchstart', startDrag, { passive: true });
-
-    catImgBoxes.forEach(box => {
-        box.addEventListener('click', () => {
-            const imgUrl = box.querySelector('.cat-img').src;
-            lightboxImg.src = imgUrl;
-            lightbox.classList.add('active');
+        dragBtn.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768) {
+                window.location.href = 'game/';
+            }
         });
-    });
 
-    lightboxClose.addEventListener('click', (e) => {
-        e.stopPropagation();
-        lightbox.classList.remove('active');
-    });
-
-    lightbox.addEventListener('click', () => {
-        lightbox.classList.remove('active');
-    });
-</script>
-
-<script src="/cookie.js"></script>
+        catImgBoxes.forEach(box => { box.addEventListener('click', () => { lightboxImg.src = box.querySelector('.cat-img').src; lightbox.classList.add('active'); }); });
+        lightboxClose.addEventListener('click', (e) => { e.stopPropagation(); lightbox.classList.remove('active'); });
+        lightbox.addEventListener('click', () => { lightbox.classList.remove('active'); });
+    </script>
+    <script src="/cookie.js"></script>
