@@ -150,11 +150,15 @@
             leaderboardList.innerHTML = `<li style="color:#888; text-align:center;">Никто еще не бегал</li>`;
             return;
         }
+        
         list.forEach((item, index) => {
-            if (item[1] > 0) {
+            const currentName = item[0];
+            const currentScore = parseInt(item[1]);
+            
+            if (currentScore > 0) {
                 const li = document.createElement('li');
                 li.className = 'leaderboard-item';
-                li.innerHTML = `<div><span class="rank">#${index+1}</span> ${item[0]}</div><div>${item[1]}</div>`;
+                li.innerHTML = `<div><span class="rank">#${index+1}</span> ${currentName}</div><div>${currentScore}</div>`;
                 leaderboardList.appendChild(li);
             }
         });
@@ -265,6 +269,7 @@
         saveOnlyBtn.disabled = true;
         
         const script = document.createElement('script');
+        script.id = 'jsonp-leaderboard';
         script.src = SCRIPT_URL + "?callback=renderLeaderboard&name=" + encodeURIComponent(playerName) + "&score=" + score + "&t=" + new Date().getTime();
         document.body.appendChild(script);
         
@@ -279,6 +284,7 @@
         
         if (score > 0) {
             const script = document.createElement('script');
+            script.id = 'jsonp-leaderboard';
             script.src = SCRIPT_URL + "?callback=renderLeaderboard&name=" + encodeURIComponent(playerName) + "&score=" + score + "&t=" + new Date().getTime();
             document.body.appendChild(script);
         } else {
@@ -307,4 +313,3 @@
     gameContainer.addEventListener('click', jump);
     startBtn.addEventListener('click', startGame);
 </script>
-
