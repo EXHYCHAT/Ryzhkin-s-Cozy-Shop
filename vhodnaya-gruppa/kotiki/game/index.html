@@ -5,17 +5,18 @@
     .breadcrumbs a { color: #888888; text-decoration: none; }
     .breadcrumbs .current { color: #000000; font-weight: 600; }
     
-    main { flex: 1; padding: 20px 40px 120px 40px; display: flex; flex-direction: row; gap: 40px; max-width: 1200px; width: 100%; box-sizing: border-box; margin: 0 auto; align-items: flex-start; }
+    main { flex: 1; padding: 20px 40px 40px 40px; display: flex; flex-direction: column; gap: 30px; width: 100%; box-sizing: border-box; margin: 0 auto; align-items: center; }
     
     .quake-title {
         font-family: 'Press Start 2P', monospace; font-size: 28px; line-height: 1.3; color: #ffffff; text-transform: uppercase; user-select: none; margin: 0 0 10px 0; transform: skewX(-10deg); letter-spacing: -2px; display: inline-block;
         text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px 2px 0 #000, -4px 4px 0 #000, -6px 6px 0 #000, -8px 8px 0 #000, -10px 10px 15px rgba(0,0,0,0.3);
     }
 
-    .game-area-wrapper { flex: 2; display: flex; flex-direction: column; width: 100%; }
+    /* ИГРОВОЙ ЭКРАН — ПОЛНОШИРИННЫЙ НА ПК И 16:9 НА СМАРТФОНАХ */
+    .game-area-wrapper { width: 100%; max-width: 1100px; display: flex; flex-direction: column; }
     
     .game-container {
-        width: 100%; height: 300px; border: 4px solid #000000; position: relative; background: #fafafa; overflow: hidden; box-sizing: border-box;
+        width: 100%; height: 350px; border: 4px solid #000000; position: relative; background: #fafafa; overflow: hidden; box-sizing: border-box; touch-action: manipulation; -webkit-user-select: none; user-select: none;
     }
 
     #cat {
@@ -38,7 +39,7 @@
     .game-overlay h2 { font-family: 'Press Start 2P', monospace; font-size: 14px; text-transform: uppercase; margin-bottom: 20px; text-align: center; }
     
     .pixel-input {
-        font-family: 'Press Start 2P', monospace; font-size: 11px; padding: 10px; border: 4px solid #000000; outline: none; margin-bottom: 20px; width: 80%; max-width: 300px; text-align: center;
+        font-family: 'Press Start 2P', monospace; font-size: 11px; padding: 10px; border: 4px solid #000000; outline: none; margin-bottom: 20px; width: 80%; max-width: 300px; text-align: center; background: #ffffff;
     }
     
     .pixel-btn {
@@ -46,21 +47,30 @@
     }
     .pixel-btn:hover { background: #ffffff; color: #000000; transform: skewX(-5deg); }
 
-    .live-score { font-family: 'Press Start 2P', monospace; font-size: 14px; margin-bottom: 15px; text-align: left; }
+    .live-score { font-family: 'Press Start 2P', monospace; font-size: 14px; margin-bottom: 15px; text-align: left; align-self: flex-start; }
 
-    .leaderboard-wrapper { flex: 1; min-width: 280px; border: 4px solid #000000; background: #ffffff; padding: 20px; box-sizing: border-box; }
-    .leaderboard-wrapper h2 { font-family: 'Press Start 2P', monospace; font-size: 12px; text-transform: uppercase; margin: 0 0 20px 0; text-align: center; border-bottom: 4px solid #000000; padding-bottom: 10px; }
+    /* РЕЙТИНГ В ПОДВАЛЕ СТРАНИЦЫ */
+    .leaderboard-wrapper { width: 100%; max-width: 1100px; border: 4px solid #000000; background: #ffffff; padding: 25px 30px; box-sizing: border-box; margin-top: 20px; }
+    .leaderboard-wrapper h2 { font-family: 'Press Start 2P', monospace; font-size: 13px; text-transform: uppercase; margin: 0 0 20px 0; text-align: center; border-bottom: 4px solid #000000; padding-bottom: 15px; }
     
-    .leaderboard-list { list-style: none; padding: 0; margin: 0; font-family: 'Press Start 2P', monospace; font-size: 10px; line-height: 2; }
-    .leaderboard-item { display: flex; justify-content: space-between; border-bottom: 1px dashed #cccccc; padding: 4px 0; }
-    .leaderboard-item:last-child { border-bottom: none; }
+    .leaderboard-list { list-style: none; padding: 0; margin: 0; font-family: 'Press Start 2P', monospace; font-size: 11px; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px 30px; }
+    .leaderboard-item { display: flex; justify-content: space-between; border-bottom: 1px dashed #cccccc; padding: 6px 0; box-sizing: border-box; }
     .leaderboard-item .rank { color: #888888; margin-right: 5px; }
 
     .hidden { display: none !important; }
 
+    /* АДАПТИВНОСТЬ 16:9 И ТАЧ-ЗОНЫ ДЛЯ МОБИЛЬНЫХ СТРОГО */
     @media (max-width: 768px) {
-        main { flex-direction: column; padding: 10px 20px; }
-        .leaderboard-wrapper { width: 100%; min-width: 0; margin-top: 20px; }
+        .top-header-block { align-items: center; padding: 20px; }
+        .breadcrumbs { text-align: center; font-size: 13px; }
+        main { padding: 10px 20px 60px 20px; }
+        .game-area-wrapper { width: 100%; }
+        .game-container { height: auto; aspect-ratio: 16 / 9; }
+        .leaderboard-list { grid-template-columns: 1fr; gap: 10px; }
+        .pixel-btn { width: 100%; box-sizing: border-box; text-align: center; margin: 5px 0; }
+        #cat { width: 40px; height: 40px; font-size: 32px; line-height: 40px; left: 25px; bottom: 15px; }
+        .obstacle { width: 30px; height: 30px; font-size: 24px; line-height: 30px; bottom: 15px; }
+        .ground-line { bottom: 15px; }
     }
 </style>
 <div class="top-header-block">
@@ -71,6 +81,7 @@
 </div>
 
 <main>
+    <!-- Игровой экран на полную ширину ПК контента -->
     <div class="game-area-wrapper">
         <div class="live-score">Счёт: <span id="scoreVal">0</span></div>
         
@@ -78,28 +89,31 @@
             <div id="cat">🐈</div>
             <div class="ground-line"></div>
             
+            <!-- Стартовое окно -->
             <div class="game-overlay" id="startScreen">
                 <h2>Регистрация кота-атлета</h2>
                 <input type="text" id="playerName" class="pixel-input" placeholder="ИМЯ КОТИКА" maxlength="15">
                 <button class="pixel-btn" id="startBtn">СТАРТ</button>
             </div>
 
+            <!-- Плашка финиша -->
             <div class="game-overlay hidden" id="endScreen">
                 <h2>БАМС! Препятствие!</h2>
                 <p style="font-family:'Press Start 2P'; font-size:11px; margin-bottom:20px; text-align:center;">Ваш счёт: <span id="finalScore">0</span></p>
-                <div style="display:flex; flex-direction:row; justify-content:center; width:100%; flex-wrap:wrap;">
+                <div style="display:flex; flex-direction:row; justify-content:center; width:100%; flex-wrap:wrap; max-width:500px;">
                     <button class="pixel-btn" id="saveOnlyBtn">СОХРАНИТЬ</button>
                     <button class="pixel-btn" id="saveAndRestartBtn">ЗАНЕВО</button>
                 </div>
             </div>
         </div>
-        <p style="font-size: 13px; color: #666; margin-top: 10px;">Нажимайте <b>Пробел</b>, <b>Вверх</b> или кликайте по экрану для прыжка.</p>
+        <p style="font-size: 13px; color: #666; margin-top: 10px; align-self: flex-start;">Управление: <b>Пробел</b>, стрелка <b>Вверх</b> или любой <b>Тап/Клик</b> по экрану игры.</p>
     </div>
 
+    <!-- Таблица лидеров переехала в подвал (горизонтальная сетка) -->
     <div class="leaderboard-wrapper">
-        <h2>ТОП-10 КОТОВ</h2>
+        <h2>ТОП-10 КОТОВ ДВОРА</h2>
         <ul class="leaderboard-list" id="leaderboardList">
-            <li style="color:#888; text-align:center;">Загрузка рекордов...</li>
+            <li style="color:#888; text-align:center; grid-column: 1 / -1;">Загрузка рекордов...</li>
         </ul>
     </div>
 </main>
@@ -135,7 +149,7 @@
         script.src = SCRIPT_URL + "?callback=renderLeaderboard&t=" + new Date().getTime();
         
         script.onerror = function() {
-            leaderboardList.innerHTML = `<li style="color:#888; text-align:center;">Пока нет рекордов</li>`;
+            leaderboardList.innerHTML = `<li style="color:#888; text-align:center; grid-column: 1 / -1;">Пока нет рекордов</li>`;
         };
         document.body.appendChild(script);
     }
@@ -147,7 +161,7 @@
         const list = data.leaderboard;
         
         if (!list || list.length === 0) {
-            leaderboardList.innerHTML = `<li style="color:#888; text-align:center;">Никто еще не бегал</li>`;
+            leaderboardList.innerHTML = `<li style="color:#888; text-align:center; grid-column: 1 / -1;">Никто еще не бегал</li>`;
             return;
         }
         
@@ -164,20 +178,24 @@
         });
         
         if (leaderboardList.innerHTML === "") {
-            leaderboardList.innerHTML = `<li style="color:#888; text-align:center;">Никто еще не бегал</li>`;
+            leaderboardList.innerHTML = `<li style="color:#888; text-align:center; grid-column: 1 / -1;">Никто еще не бегал</li>`;
         }
     };
 
     function jump() {
         if (isJumping || !isPlaying) return;
         isJumping = true;
-        let position = 20;
+        
+        // Автоматический пересчёт высоты прыжка в зависимости от высоты контейнера (для мобильного 16:9)
+        const currentGroundPos = window.innerWidth <= 768 ? 15 : 20;
+        const maxJumpHeight = window.innerWidth <= 768 ? (gameContainer.clientHeight * 0.5) : 140;
+        let position = currentGroundPos;
         
         let upInterval = setInterval(() => {
-            if (position >= 140) {
+            if (position >= maxJumpHeight) {
                 clearInterval(upInterval);
                 let downInterval = setInterval(() => {
-                    if (position <= 20) {
+                    if (position <= currentGroundPos) {
                         clearInterval(downInterval);
                         isJumping = false;
                     }
@@ -202,6 +220,8 @@
         currentObstacle = obs;
 
         let obsPosition = gameContainer.clientWidth;
+        const currentGroundPos = window.innerWidth <= 768 ? 15 : 20;
+        obs.style.bottom = currentGroundPos + 'px';
         
         let moveInterval = setInterval(() => {
             if (!isPlaying) {
@@ -304,12 +324,21 @@
         }, 800);
     });
 
+    // УПРАВЛЕНИЕ КЛАВИАТУРОЙ
     document.addEventListener('keydown', (e) => {
         if (e.code === 'Space' || e.code === 'ArrowUp') {
             e.preventDefault();
             jump();
         }
     });
-    gameContainer.addEventListener('click', jump);
+
+    // НАТИВНЫЙ И МГНОВЕННЫЙ ТАП/КЛИК ЧЕРЕЗ POINTERDOWN БЕЗ ЗАДЕРЖЕК
+    gameContainer.addEventListener('pointerdown', (e) => {
+        // Запрещаем прыжок при клике на кнопки плашки или поле ввода имени
+        if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') return;
+        e.preventDefault();
+        jump();
+    });
+
     startBtn.addEventListener('click', startGame);
 </script>
