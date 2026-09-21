@@ -122,22 +122,6 @@
     let currentObstacle = null;
     let playerName = "";
 
-    const hiddenIframe = document.createElement('iframe');
-    hiddenIframe.name = 'hidden_iframe';
-    hiddenIframe.style.display = 'none';
-    document.body.appendChild(hiddenIframe);
-
-    const hiddenForm = document.createElement('form');
-    hiddenForm.method = 'POST';
-    hiddenForm.action = SCRIPT_URL;
-    hiddenForm.target = 'hidden_iframe';
-    hiddenForm.style.display = 'none';
-    
-    const formInput = document.createElement('input');
-    formInput.name = 'myData';
-    hiddenForm.appendChild(formInput);
-    document.body.appendChild(hiddenForm);
-
     function fetchLeaderboard() {
         const oldScript = document.getElementById('jsonp-leaderboard');
         if (oldScript) oldScript.remove();
@@ -147,7 +131,8 @@
         script.src = SCRIPT_URL + "?callback=renderLeaderboard&t=" + new Date().getTime();
         
         script.onerror = function() {
-            leaderboardList.innerHTML = `<li style="color:red; text-align:center;">Ошибка сети</li>`;
+            // Если таблица абсолютно пустая, выводим заглушку вместо падения в ошибку
+            leaderboardList.innerHTML = `<li style="color:#888; text-align:center;">Пока нет рекордов</li>`;
         };
         document.body.appendChild(script);
     }
@@ -171,9 +156,20 @@
     };
 
     function submitScore(name, finalScoreVal) {
-        formInput.value = JSON.stringify({ name: name, score: finalScoreVal });
-        hiddenForm.submit();
-        setTimeout(fetchLeaderboard, 1500);
+        // Безопасный кросс-доменный запрос без проверки CORS политик браузера
+        fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name: name, score: finalScoreVal })
+        }).then(() => {
+            // Запрашиваем обновление ТОП-10 спустя секунду
+            setTimeout(fetchLeaderboard, 1200);
+        }).catch(err => {
+            console.error("Ошибка сети при отправке:", err);
+        });
     }
 
     function jump() {
