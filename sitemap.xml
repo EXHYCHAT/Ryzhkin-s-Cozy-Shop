@@ -1,37 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://sitemaps.org">
-    <!-- Главная страница (Порог) -->
     <url>
-        <loc>https://exhychat.github.io/Ryzhkin-s-Cozy-Shop/index.html</loc>
-        <lastmod>2026-09-16</lastmod>
-        <changefreq>monthly</changefreq>
+        <loc>https://urealismo.ru</loc>
+        <lastmod>2026-09-21</lastmod>
+        <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
-    <!-- Входная группа (Страница выбора категорий) -->
     <url>
-        <loc>https://github.io</loc>
-        <lastmod>2026-09-16</lastmod>
-        <changefreq>monthly</changefreq>
+        <loc>https://urealismo.ruvhodnaya-gruppa/</loc>
+        <lastmod>2026-09-21</lastmod>
+        <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    <!-- Раздел Кулинария -->
     <url>
-        <loc>https://github.io</loc>
-        <lastmod>2026-09-16</lastmod>
+        <loc>https://urealismo.ruvhodnaya-gruppa/kulinariya/</loc>
+        <lastmod>2026-09-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    <!-- Раздел Алкоголь -->
     <url>
-        <loc>https://github.io</loc>
-        <lastmod>2026-09-16</lastmod>
+        <loc>https://urealismo.ruvhodnaya-gruppa/alkogol/</loc>
+        <lastmod>2026-09-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    <!-- Раздел Gonzo -->
     <url>
-        <loc>https://github.io</loc>
-        <lastmod>2026-09-16</lastmod>
+        <loc>https://urealismo.ruvhodnaya-gruppa/gonzo/</loc>
+        <lastmod>2026-09-21</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
