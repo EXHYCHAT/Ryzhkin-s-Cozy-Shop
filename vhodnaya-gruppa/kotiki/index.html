@@ -15,7 +15,7 @@
     }
     @keyframes quakePulse {
         0%, 100% { color: #ffffff; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px 2px 0 #000, -4px 4px 0 #000, -6px 6px 0 #000, -8px 8px 0 #000, -10px 10px 15px rgba(0,0,0,0.3); }
-        50% { color: #e5e5e5; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px 2px 0 #000, -5px 5px 0 #333, -8px 8px 0 #111, -11px 11px 20px rgba(0,0,0,0.5); }
+        50% { color: #e5e5e5; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px 2px 0 #000, -4px 4px 0 #333, -6px 6px 0 #111, -8px 8px 11px rgba(0,0,0,0.5); }
     }
 
     .signboard-holder {
@@ -131,32 +131,30 @@
         transition: transform 0.1s, background-color 0.1s;
     }
     .lightbox-close:hover { background-color: #000000; transform: scale(1.05) skewX(-5deg); }
-    
-    .lightbox-close::before {
-        content: 'X'; font-family: 'Press Start 2P', monospace;
-        font-size: 16px; color: #000000; font-weight: bold;
-    }
+    .lightbox-close::before { content: 'X'; font-family: 'Press Start 2P', monospace; font-size: 16px; color: #000000; font-weight: bold; }
     .lightbox-close:hover::before { color: #ffffff; }
 
     @media (max-width: 768px) {
         .top-header-block { align-items: center; padding: 20px 20px 0px 20px; }
         .breadcrumbs { text-align: center; font-size: 13px; }
-        main { padding: 10px 20px 100px 20px; }
-        .quake-title { font-size: 16px; letter-spacing: -1px; text-align: center; align-self: center; margin-bottom: 10px; }
+        main { padding: 10px 15px 100px 15px; }
+        .quake-title { font-size: 16px; letter-spacing: -1px; text-align: center; align-self: center; margin-bottom: 15px; }
         
-        .signboard-holder { display: block; width: 100%; margin-bottom: 20px; transform: none; animation: none; position: static; }
-        .draggable-game-btn { width: 100%; padding: 15px; box-shadow: 0 0 0 4px #ffffff, 0 10px 20px rgba(0,0,0,0.06); margin-top: 15px; }
+        .signboard-holder { display: block; width: 100%; margin-bottom: 15px; transform: none; animation: none; position: static; box-sizing: border-box; }
+        .draggable-game-btn { width: 100%; padding: 15px; box-shadow: 0 0 0 4px #ffffff, 0 10px 20px rgba(0,0,0,0.06); margin-top: 5px; }
         .draggable-game-btn .btn-text { font-size: 12px; }
         
-        .boosty-footer-box { flex-direction: column; padding: 20px; gap: 15px; margin-top: 0; width: 100%; }
+        .boosty-footer-box { flex-direction: column; padding: 20px 15px; gap: 15px; margin-top: 0; margin-bottom: 30px; width: 100%; }
         .boosty-info { text-align: center; }
         .boosty-info h2 { text-align: center; font-size: 11px; }
         .boosty-info p { text-align: center; font-size: 14px; }
-        .boosty-link-btn { width: 100%; max-width: none; }
+        .boosty-link-btn { width: 100%; max-width: none; font-size: 11px; padding: 12px; }
         
-        .cats-grid { grid-template-columns: 1fr; gap: 20px; }
-        .back-btn { width: calc(100% - 40px); left: 10px; right: 10px; text-align: center; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); }
+        .cats-grid { grid-template-columns: 1fr; gap: 25px; width: 100%; margin-bottom: 30px; }
+        .cat-card { width: 100%; padding: 15px; }
+        .cat-desc { font-size: 14px; line-height: 1.6; }
         
+        .back-btn { width: calc(100% - 30px); left: 15px; right: 15px; text-align: center; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); }
         .lightbox-close { top: 20px; right: 20px; width: 40px; height: 40px; }
         .lightbox-close::before { font-size: 12px; }
     }
@@ -168,7 +166,6 @@
     </div>
 </div>
 
-<!-- Вывеска перенесена сюда и освобождена от центрирования -->
 <div class="signboard-holder">
     <div id="dragGameBtn" class="draggable-game-btn">
         <h2 class="btn-text">Дворовой Забег</h2>
