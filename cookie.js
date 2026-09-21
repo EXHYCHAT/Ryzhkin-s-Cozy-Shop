@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
     if (!localStorage.getItem("cookie_accepted")) {
-        // Создаем стили плашки
         const style = document.createElement('style');
         style.innerHTML = `
             .cookie-banner { position: fixed; bottom: 140px; left: 50%; transform: translateX(-50%); width: calc(100% - 80px); max-width: 600px; background: #ffffff; border: 4px solid #000000; box-shadow: 0 0 0 4px #ffffff, 0 15px 30px rgba(0,0,0,0.15); padding: 15px 25px; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; gap: 20px; z-index: 100; }
@@ -16,12 +15,11 @@ document.addEventListener("DOMContentLoaded", function() {
         `;
         document.head.appendChild(style);
 
-        // Создаем HTML структуру плашки
         const banner = document.createElement('div');
         banner.className = 'cookie-banner';
         banner.id = 'cookieBanner';
         banner.innerHTML = `
-            <p class="cookie-text">МЫ ИСПОЛЬЗУЕМ COOKIE ДЛЯ АНАЛИТИКИ И РЕКЛАМЫ. ОСТАВАЯСЬ НА САЙТЕ, ВЫ СОГЛАШАЕТЕСЬ С <a href="/privacy/">ПОЛИТИКОЙ</a>.</p>
+            <p class="cookie-text">МЫ ИСПОЛЬЗУЕМ COOKIE ДЛЯ АНАЛИТИКИ И РЕКЛАМЫ. ОСТАВАЯСЬ НА САЙТЕ, ВЫ СОГЛАШАЕТЕСЬ С <a href="/privacy/">ПОЛИТИКОЙ КОНФИДЕНЦИАЛЬНОСТИ</a>.</p>
             <button class="cookie-btn" onclick="acceptCookies()">ОК</button>
         `;
         document.body.appendChild(banner);
