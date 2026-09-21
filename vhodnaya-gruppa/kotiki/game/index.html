@@ -1,78 +1,91 @@
-<style>
-    body { background: #ffffff; color: #000000; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 0; min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
-    .top-header-block { display: flex; flex-direction: column; align-items: flex-start; padding: 30px 40px 10px 40px; width: 100%; box-sizing: border-box; }
-    .breadcrumbs { font-size: 14px; color: #888888; font-weight: 500; margin-top: 10px; text-align: left; }
-    .breadcrumbs a { color: #888888; text-decoration: none; }
-    .breadcrumbs .current { color: #000000; font-weight: 600; }
-    
-    main { flex: 1; padding: 20px 40px 40px 40px; display: flex; flex-direction: column; gap: 30px; width: 100%; box-sizing: border-box; margin: 0 auto; align-items: center; }
-    
-    .quake-title {
-        font-family: 'Press Start 2P', monospace; font-size: 28px; line-height: 1.3; color: #ffffff; text-transform: uppercase; user-select: none; margin: 0 0 10px 0; transform: skewX(-10deg); letter-spacing: -2px; display: inline-block;
-        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px 2px 0 #000, -4px 4px 0 #000, -6px 6px 0 #000, -8px 8px 0 #000, -10px 10px 15px rgba(0,0,0,0.3);
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>КОТИК-БЕГУН — Уютная Лавка Рыжкина</title>
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        body { background: #ffffff; color: #000000; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 0; min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
+        .top-header-block { display: flex; flex-direction: column; align-items: flex-start; padding: 30px 40px 10px 40px; width: 100%; box-sizing: border-box; }
+        .breadcrumbs { font-size: 14px; color: #888888; font-weight: 500; margin-top: 10px; text-align: left; }
+        .breadcrumbs a { color: #888888; text-decoration: none; }
+        .breadcrumbs .current { color: #000000; font-weight: 600; }
+        
+        main { flex: 1; padding: 20px 40px 40px 40px; display: flex; flex-direction: column; gap: 30px; width: 100%; box-sizing: border-box; margin: 0 auto; align-items: center; }
+        
+        .quake-title {
+            font-family: 'Press Start 2P', monospace; font-size: 28px; line-height: 1.3; color: #ffffff; text-transform: uppercase; user-select: none; margin: 0 0 10px 0; transform: skewX(-10deg); letter-spacing: -2px; display: inline-block;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px 2px 0 #000, -4px 4px 0 #000, -6px 6px 0 #000, -8px 8px 0 #000, -10px 10px 15px rgba(0,0,0,0.3);
+        }
 
-    /* ИГРОВОЙ ЭКРАН — ПОЛНОШИРИННЫЙ НА ПК И 16:9 НА СМАРТФОНАХ */
-    .game-area-wrapper { width: 100%; max-width: 1100px; display: flex; flex-direction: column; }
-    
-    .game-container {
-        width: 100%; height: 350px; border: 4px solid #000000; position: relative; background: #fafafa; overflow: hidden; box-sizing: border-box; touch-action: manipulation; -webkit-user-select: none; user-select: none;
-    }
+        .game-area-wrapper { width: 100%; max-width: 1100px; display: flex; flex-direction: column; }
+        
+        .game-container {
+            width: 100%; height: 350px; border: 4px solid #000000; position: relative; background: #fafafa; overflow: hidden; box-sizing: border-box; touch-action: manipulation; -webkit-user-select: none; user-select: none;
+        }
 
-    #cat {
-        width: 50px; height: 50px; font-size: 40px; line-height: 50px; text-align: center;
-        position: absolute; bottom: 20px; left: 50px; z-index: 2; user-select: none;
-    }
-    .obstacle {
-        width: 40px; height: 40px; font-size: 32px; line-height: 40px; text-align: center;
-        position: absolute; bottom: 20px; right: -50px; z-index: 2; user-select: none;
-    }
-    .ground-line {
-        position: absolute; bottom: 20px; left: 0; width: 100%; height: 4px; background: #000000; z-index: 1;
-    }
+        #cat {
+            width: 50px; height: 50px; font-size: 40px; line-height: 50px; text-align: center;
+            position: absolute; bottom: 20px; left: 50px; z-index: 2; user-select: none;
+        }
+        .obstacle {
+            width: 40px; height: 40px; font-size: 32px; line-height: 40px; text-align: center;
+            position: absolute; bottom: 20px; right: -50px; z-index: 2; user-select: none;
+        }
+        .ground-line {
+            position: absolute; bottom: 20px; left: 0; width: 100%; height: 4px; background: #000000; z-index: 1;
+        }
 
-    .game-overlay {
-        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(255, 255, 255, 0.95); z-index: 10;
-        display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;
-    }
-    .game-overlay h2 { font-family: 'Press Start 2P', monospace; font-size: 14px; text-transform: uppercase; margin-bottom: 20px; text-align: center; }
-    
-    .pixel-input {
-        font-family: 'Press Start 2P', monospace; font-size: 11px; padding: 10px; border: 4px solid #000000; outline: none; margin-bottom: 20px; width: 80%; max-width: 300px; text-align: center; background: #ffffff;
-    }
-    
-    .pixel-btn {
-        background: #000000; color: #ffffff; border: 4px solid #000000; padding: 12px 24px; font-family: 'Press Start 2P', monospace; font-size: 10px; text-transform: uppercase; cursor: pointer; transition: transform 0.1s; margin: 5px;
-    }
-    .pixel-btn:hover { background: #ffffff; color: #000000; transform: skewX(-5deg); }
+        .game-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.95); z-index: 10;
+            display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box;
+        }
+        .game-overlay h2 { font-family: 'Press Start 2P', monospace; font-size: 14px; text-transform: uppercase; margin-bottom: 20px; text-align: center; }
+        
+        .pixel-input {
+            font-family: 'Press Start 2P', monospace; font-size: 11px; padding: 10px; border: 4px solid #000000; outline: none; margin-bottom: 20px; width: 80%; max-width: 300px; text-align: center; background: #ffffff;
+        }
+        
+        .pixel-btn {
+            background: #000000; color: #ffffff; border: 4px solid #000000; padding: 12px 24px; font-family: 'Press Start 2P', monospace; font-size: 10px; text-transform: uppercase; cursor: pointer; transition: transform 0.1s; margin: 5px;
+        }
+        .pixel-btn:hover { background: #ffffff; color: #000000; transform: skewX(-5deg); }
 
-    .live-score { font-family: 'Press Start 2P', monospace; font-size: 14px; margin-bottom: 15px; text-align: left; align-self: flex-start; }
+        .live-score { font-family: 'Press Start 2P', monospace; font-size: 14px; margin-bottom: 15px; text-align: left; align-self: flex-start; }
 
-    /* РЕЙТИНГ В ПОДВАЛЕ СТРАНИЦЫ */
-    .leaderboard-wrapper { width: 100%; max-width: 1100px; border: 4px solid #000000; background: #ffffff; padding: 25px 30px; box-sizing: border-box; margin-top: 20px; }
-    .leaderboard-wrapper h2 { font-family: 'Press Start 2P', monospace; font-size: 13px; text-transform: uppercase; margin: 0 0 20px 0; text-align: center; border-bottom: 4px solid #000000; padding-bottom: 15px; }
-    
-    .leaderboard-list { list-style: none; padding: 0; margin: 0; font-family: 'Press Start 2P', monospace; font-size: 11px; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px 30px; }
-    .leaderboard-item { display: flex; justify-content: space-between; border-bottom: 1px dashed #cccccc; padding: 6px 0; box-sizing: border-box; }
-    .leaderboard-item .rank { color: #888888; margin-right: 5px; }
+        .leaderboard-wrapper { width: 100%; max-width: 1100px; border: 4px solid #000000; background: #ffffff; padding: 25px 30px; box-sizing: border-box; margin-top: 20px; }
+        .leaderboard-wrapper h2 { font-family: 'Press Start 2P', monospace; font-size: 12px; text-transform: uppercase; margin: 0 0 20px 0; text-align: center; border-bottom: 4px solid #000000; padding-bottom: 15px; }
+        
+        .leaderboard-list { list-style: none; padding: 0; margin: 0; font-family: 'Press Start 2P', monospace; font-size: 11px; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px 30px; }
+        .leaderboard-item { display: flex; justify-content: space-between; border-bottom: 1px dashed #cccccc; padding: 6px 0; box-sizing: border-box; }
+        .leaderboard-item .rank { color: #888888; margin-right: 5px; }
 
-    .hidden { display: none !important; }
+        .hidden { display: none !important; }
 
-    /* АДАПТИВНОСТЬ 16:9 И ТАЧ-ЗОНЫ ДЛЯ МОБИЛЬНЫХ СТРОГО */
-    @media (max-width: 768px) {
-        .top-header-block { align-items: center; padding: 20px; }
-        .breadcrumbs { text-align: center; font-size: 13px; }
-        main { padding: 10px 20px 60px 20px; }
-        .game-area-wrapper { width: 100%; }
-        .game-container { height: auto; aspect-ratio: 16 / 9; }
-        .leaderboard-list { grid-template-columns: 1fr; gap: 10px; }
-        .pixel-btn { width: 100%; box-sizing: border-box; text-align: center; margin: 5px 0; }
-        #cat { width: 40px; height: 40px; font-size: 32px; line-height: 40px; left: 25px; bottom: 15px; }
-        .obstacle { width: 30px; height: 30px; font-size: 24px; line-height: 30px; bottom: 15px; }
-        .ground-line { bottom: 15px; }
-    }
-</style>
+        /* ЖЕСТКИЙ ПЕРЕВОД В 16:9 НА МОБИЛКАХ ОТ КРАЯ ДО КРАЯ ЭкРАНА */
+        @media (max-width: 768px) {
+            .top-header-block { align-items: center; padding: 15px; }
+            .breadcrumbs { text-align: center; font-size: 12px; }
+            main { padding: 10px 10px 40px 10px; gap: 20px; }
+            .game-area-wrapper { width: 100%; }
+            
+            /* Контейнер теперь железно встает в пропорцию 16:9 и растягивается на 100% ширины телефона */
+            .game-container { width: 100%; height: auto; aspect-ratio: 16 / 9; }
+            
+            .leaderboard-wrapper { padding: 15px; }
+            .leaderboard-list { grid-template-columns: 1fr; gap: 10px; }
+            .pixel-btn { width: 100%; box-sizing: border-box; text-align: center; margin: 5px 0; font-size: 9px; padding: 10px; }
+            .game-overlay h2 { font-size: 11px; margin-bottom: 10px; }
+            .pixel-input { font-size: 10px; padding: 8px; margin-bottom: 10px; }
+            
+            #cat { width: 35px; height: 35px; font-size: 28px; line-height: 35px; left: 20px; bottom: 12px; }
+            .obstacle { width: 28px; height: 28px; font-size: 22px; line-height: 28px; bottom: 12px; }
+            .ground-line { bottom: 12px; }
+        }
+    </style>
+</head>
 <div class="top-header-block">
     <h1 class="quake-title">котик-бегун</h1>
     <div class="breadcrumbs">
@@ -81,7 +94,6 @@
 </div>
 
 <main>
-    <!-- Игровой экран на полную ширину ПК контента -->
     <div class="game-area-wrapper">
         <div class="live-score">Счёт: <span id="scoreVal">0</span></div>
         
@@ -89,14 +101,12 @@
             <div id="cat">🐈</div>
             <div class="ground-line"></div>
             
-            <!-- Стартовое окно -->
             <div class="game-overlay" id="startScreen">
                 <h2>Регистрация кота-атлета</h2>
                 <input type="text" id="playerName" class="pixel-input" placeholder="ИМЯ КОТИКА" maxlength="15">
                 <button class="pixel-btn" id="startBtn">СТАРТ</button>
             </div>
 
-            <!-- Плашка финиша -->
             <div class="game-overlay hidden" id="endScreen">
                 <h2>БАМС! Препятствие!</h2>
                 <p style="font-family:'Press Start 2P'; font-size:11px; margin-bottom:20px; text-align:center;">Ваш счёт: <span id="finalScore">0</span></p>
@@ -109,7 +119,6 @@
         <p style="font-size: 13px; color: #666; margin-top: 10px; align-self: flex-start;">Управление: <b>Пробел</b>, стрелка <b>Вверх</b> или любой <b>Тап/Клик</b> по экрану игры.</p>
     </div>
 
-    <!-- Таблица лидеров переехала в подвал (горизонтальная сетка) -->
     <div class="leaderboard-wrapper">
         <h2>ТОП-10 КОТОВ ДВОРА</h2>
         <ul class="leaderboard-list" id="leaderboardList">
@@ -186,9 +195,9 @@
         if (isJumping || !isPlaying) return;
         isJumping = true;
         
-        // Автоматический пересчёт высоты прыжка в зависимости от высоты контейнера (для мобильного 16:9)
-        const currentGroundPos = window.innerWidth <= 768 ? 15 : 20;
-        const maxJumpHeight = window.innerWidth <= 768 ? (gameContainer.clientHeight * 0.5) : 140;
+        const isMobile = window.innerWidth <= 768;
+        const currentGroundPos = isMobile ? 12 : 20;
+        const maxJumpHeight = isMobile ? (gameContainer.clientHeight * 0.55) : 140;
         let position = currentGroundPos;
         
         let upInterval = setInterval(() => {
@@ -199,11 +208,11 @@
                         clearInterval(downInterval);
                         isJumping = false;
                     }
-                    position -= 6;
+                    position -= isMobile ? 5 : 6;
                     cat.style.bottom = position + 'px';
                 }, 15);
             }
-            position += 8;
+            position += isMobile ? 7 : 8;
             cat.style.bottom = position + 'px';
         }, 15);
     }
@@ -220,7 +229,7 @@
         currentObstacle = obs;
 
         let obsPosition = gameContainer.clientWidth;
-        const currentGroundPos = window.innerWidth <= 768 ? 15 : 20;
+        const currentGroundPos = window.innerWidth <= 768 ? 12 : 20;
         obs.style.bottom = currentGroundPos + 'px';
         
         let moveInterval = setInterval(() => {
@@ -237,9 +246,9 @@
             let obsRect = obs.getBoundingClientRect();
 
             if (
-                catRect.right > obsRect.left + 12 && 
-                catRect.left < obsRect.right - 12 && 
-                catRect.bottom > obsRect.top + 12
+                catRect.right > obsRect.left + 10 && 
+                catRect.left < obsRect.right - 10 && 
+                catRect.bottom > obsRect.top + 10
             ) {
                 clearInterval(moveInterval);
                 handleGameOver();
@@ -324,7 +333,6 @@
         }, 800);
     });
 
-    // УПРАВЛЕНИЕ КЛАВИАТУРОЙ
     document.addEventListener('keydown', (e) => {
         if (e.code === 'Space' || e.code === 'ArrowUp') {
             e.preventDefault();
@@ -332,9 +340,7 @@
         }
     });
 
-    // НАТИВНЫЙ И МГНОВЕННЫЙ ТАП/КЛИК ЧЕРЕЗ POINTERDOWN БЕЗ ЗАДЕРЖЕК
     gameContainer.addEventListener('pointerdown', (e) => {
-        // Запрещаем прыжок при клике на кнопки плашки или поле ввода имени
         if (e.target.tagName === 'BUTTON' || e.target.tagName === 'INPUT') return;
         e.preventDefault();
         jump();
