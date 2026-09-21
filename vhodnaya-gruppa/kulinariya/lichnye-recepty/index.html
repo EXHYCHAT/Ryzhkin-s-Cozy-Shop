@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Моно гречотто с касанием Грузии — Рецепты — Уютная Лавка Рыжкина</title>
+    <meta name="description" content="Пошаговый авторский рецепт моно гречотто с касанием Грузии. Легкое и быстрое блюдо с грузинскими нотками, аджикой и ароматными травами без вина и готового бульона.">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        body { background: #ffffff; color: #000000; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 0; min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
+        
+        .top-header-block { display: flex; flex-direction: column; align-items: flex-start; padding: 30px 40px 10px 40px; width: 100%; box-sizing: border-box; }
+        .breadcrumbs { font-size: 14px; color: #888888; font-weight: 500; margin-top: 10px; }
+        .breadcrumbs a { color: #888888; text-decoration: none; transition: color 0.2s; }
+        .breadcrumbs a:hover { color: #000000; }
+        .breadcrumbs .current { color: #000000; font-weight: 600; }
+        
+        main { flex: 1; padding: 20px 40px 120px 40px; display: flex; flex-direction: column; align-items: flex-start; position: relative; box-sizing: border-box; }
+        
+        .quake-title {
+            font-family: 'Press Start 2P', monospace; font-size: 32px; line-height: 1.3; color: #ffffff; text-transform: uppercase; user-select: none; margin: 0 0 30px 0; text-align: left; transform: skewX(-10deg); letter-spacing: -2px; display: inline-block;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px 2px 0 #000, -3px 3px 0 #000, -4px 4px 0 #000, -5px 5px 0 #000, -6px 6px 0 #000, -7px 7px 0 #000, -8px 8px 0 #000, -9px 9px 0 #000, -10px 10px 15px rgba(0,0,0,0.4);
+            animation: quakePulse 2s infinite ease-in-out;
+        }
+        @keyframes quakePulse {
+            0%, 100% { color: #ffffff; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px 2px 0 #000, -4px 4px 0 #000, -6px 6px 0 #000, -8px 8px 0 #000, -10px 10px 15px rgba(0,0,0,0.3); }
+            50% { color: #e5e5e5; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px 2px 0 #000, -5px 5px 0 #333, -8px 8px 0 #111, -11px 11px 20px rgba(0,0,0,0.5); }
+        }
+        
+        .recipe-meta-panel { display: flex; gap: 30px; margin-bottom: 30px; background: #f9f9f9; padding: 15px 25px; border-left: 4px solid #000000; font-size: 15px; font-weight: 600; width: 100%; max-width: 800px; box-sizing: border-box; }
+        .meta-value { color: #000000; font-weight: 700; }
+        
+        .content-body { width: 100%; max-width: 800px; text-align: left; font-size: 18px; line-height: 1.6; color: #333333; animation: fadeIn 0.4s ease forwards; }
+        .content-body p { margin-bottom: 20px; }
+        
+        .recipe-section { margin-top: 35px; width: 100%; }
+        .recipe-section h2 { font-size: 22px; color: #000000; margin-bottom: 15px; border-bottom: 2px solid #000000; padding-bottom: 5px; display: inline-block; }
+        
+        .ingredients-list { list-style: none; padding: 0; margin: 0; }
+        .ingredients-list li { padding: 8px 0; border-bottom: 1px dashed #dddddd; display: flex; justify-content: space-between; font-size: 16px; max-width: 500px; }
+        .ingredients-list li span:first-child { color: #555555; }
+        .ingredients-list li span:last-child { font-weight: 700; color: #000000; }
+        .steps-list { padding-left: 20px; margin: 0; }
+        .steps-list li { margin-bottom: 15px; font-size: 16px; line-height: 1.6; }
+        
+        .back-btn { position: fixed; bottom: 10px; left: 10px; margin: 0; padding: 10px; color: #000000; text-decoration: none; font-size: 14px; font-weight: 500; opacity: 0.5; transition: opacity 0.2s ease; z-index: 20; background: rgba(255,255,255,0.9); border-radius: 4px; }
+        .back-btn:hover { opacity: 1; }
+        
+        @media (max-width: 768px) {
+            .top-header-block { align-items: center; text-align: center; padding: 20px; }
+            .breadcrumbs { text-align: center; font-size: 13px; }
+            main { padding: 10px 20px 100px 20px; align-items: center; }
+            .quake-title { font-size: 22px; letter-spacing: -1px; text-align: center; align-self: center; }
+            .recipe-meta-panel { flex-direction: column; gap: 10px; padding: 15px; }
+            .content-body { font-size: 16px; }
+            .ingredients-list li { font-size: 15px; }
+            .back-btn { width: calc(100% - 40px); left: 10px; right: 10px; text-align: center; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); }
+        }
+    </style>
+    <!-- МИКРОРАЗМЕТКА РЕЦЕПТА ДЛЯ СНИППЕТОВ ЯНДЕКСА И GOOGLE -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Recipe",
+      "name": "Моно гречотто с касанием Грузии",
+      "author": {
+        "@type": "Person",
+        "name": "Уютная Лавка Рыжкина"
+      },
+      "datePublished": "2026-09-21",
+      "description": "Лёгкий и быстрый рецепт моно гречотто. Данный рецепт подойдёт, если нет готового бульона и вина. Хороший вариант для любителей гречки, грузинских ноток и Италии.",
+      "recipeYield": "1 порция",
+      "nutrition": {
+        "@type": "NutritionInformation",
+        "calories": "443 kcal"
+      },
+      "recipeIngredient": [
+        "Гречка: 50 грамм",
+        "Сливочное масло: 25 грамм",
+        "Оливковое масло: 10 грамм",
+        "Аджика: 10 грамм",
+        "Чеснок: 5 грамм (1 зубчик)",
+        "Розмарин: 1/2 ветки",
+        "Тимьян: 1/2 ветки",
+        "Соль: по вкусу",
+        "Вода: 130 миллилитров",
+        "Острый перец: 1 штука"
+      ]
+    }
+    </script>
+</head>
+<body>
+    <div class="top-header-block">
+        <h1 class="quake-title">Моно гречотто</h1>
+        <div class="breadcrumbs">
+            <a href="../../../">Уютная Лавка Рыжкина</a> — <a href="../../../vhodnaya-gruppa/">Входная группа</a> — <a href="../">Кулинария</a> — <span class="current">Личные Рецепты</span>
+        </div>
+    </div>
+    <main>
+        <div class="recipe-meta-panel">
+            <div>Калорийность: <span class="meta-value">443 Ккал</span></div>
+            <div>Выход блюда: <span class="meta-value">+/- 130 грамм</span></div>
+        </div>
+        
+        <div class="content-body">
+            <p>Лёгкий и быстрый рецепт моно гречотто. Данный рецепт подойдёт, если нет готового бульона и вина. Хороший вариант для любителей гречки, грузинских ноток и Италии.</p>
+            <div class="recipe-section">
+                <h2>Ингредиенты:</h2>
+                <ul class="ingredients-list">
+                    <li><span>— Гречка:</span><span>50 грамм</span></li>
+                    <li><span>— Сливочное масло:</span><span>25 грамм</span></li>
+                    <li><span>— Оливковое масло:</span><span>10 грамм</span></li>
+                    <li><span>— Аджика:</span><span>10 грамм</span></li>
+                    <li><span>— Чеснок:</span><span>5 грамм (1 зубчик)</span></li>
+                    <li><span>— Розмарин:</span><span>1/2 ветки</span></li>
+                    <li><span>— Тимьян:</span><span>1/2 ветки</span></li>
+                    <li><span>— Соль:</span><span>по вкусу</span></li>
+                    <li><span>— Вода:</span><span>130 миллилитров</span></li>
+                    <li><span>— Острый перец:</span><span>1 штука</span></li>
+                </ul>
+            </div>
+
+            <div class="recipe-section" style="margin-top: 40px;">
+                <h2>Процесс изготовления:</h2>
+                <ol class="steps-list">
+                    <li>В горячую воду поместить чайную ложку не сухой аджики, размешать.</li>
+                    <li>Гречку промыть в тёплой воде и оставить в сите на слив лишней воды.</li>
+                    <li>Зубчик чеснока мелко порезать и отправить на разогретую сковородку с оливковым маслом.</li>
+                    <li>Через пол минуты добавить гречку и обжаривать на среднем огне (индукция на 6) примерно 45 секунд.</li>
+                    <li>В гречку добавить 1/4 импровизационного бульона и снизить нагрев до 4.</li>
+                    <li>Когда жидкость выпарится и впитается на 70% добавить порубленные тимьян и розмарин и ещё 1/4 бульона.</li>
+                    <li>Затем повторить с бульоном.</li>
+                    <li>После добавления последней части бульона, дожидаемся впитывания на 80-90%, дальше добавляем сливочное масло, увеличиваем нагрев до 6, и начинаем быстро перемешивать и вбивать масло в гречку.</li>
+                    <li>Теперь можно добавить соль, предварительно попробовав, и сбавив нагрев до 4 оставить сковороду на 30 секунд.</li>
+                    <li>Блюдо готово, выкладываем на тарелку, обжигаем перец чили и украшаем положив сверху, приятного аппетита!</li>
+                </ol>
+            </div>
+        </div>
+        
+        <a href="../" class="back-btn">← Вернуться в Кулинарию</a>
+    </main>
+</body>
+</html>
