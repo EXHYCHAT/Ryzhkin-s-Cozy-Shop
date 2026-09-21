@@ -284,7 +284,20 @@
     }
 
     function startGame() {
-        playerName = playerNameInput.value.trim() || "Кот Без Имени";
+        const inputName = playerNameInput.value.trim();
+        
+        // Жесткая проверка: если имя пустое, прерываем запуск игры
+        if (inputName === "") {
+            playerNameInput.style.borderColor = "#ff0000"; // Подсвечиваем красным в пиксельном ретро-стиле
+            playerNameInput.placeholder = "ВВЕДИТЕ ИМЯ!";
+            playerNameInput.focus();
+            return;
+        }
+        
+        // Если имя введено, убираем красную рамку и продолжаем старт
+        playerNameInput.style.borderColor = "#000000";
+        playerName = inputName;
+        
         startScreen.classList.add('hidden');
         endScreen.classList.add('hidden');
         resetField();
@@ -347,4 +360,9 @@
     });
 
     startBtn.addEventListener('click', startGame);
+    
+    // Возвращаем исходную черную рамку, как только игрок начинает вводить текст
+    playerNameInput.addEventListener('input', () => {
+        playerNameInput.style.borderColor = "#000000";
+    });
 </script>
