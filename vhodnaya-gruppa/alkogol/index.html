@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Алкоголь — Уютная Лавка Рыжкина</title>
+    <title>Калькулятор концентрации алкоголя онлайн — Уютная Лавка Рыжкина</title>
+    <meta name="description" content="Онлайн-калькулятор концентрации алкоголя в крови по формуле Видмарка. Рассчитайте уровень промилле, калорийность выпитого и время полного выведения алкоголя из организма.">
     <link rel="icon" type="image/png" href="/favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com" rel="stylesheet">
     <style>
         body { background: #ffffff; color: #000000; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 0; min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
         .top-bar { display: flex; justify-content: flex-end; padding: 30px 40px; }
@@ -15,9 +16,9 @@
         .breadcrumbs a { color: #888888; text-decoration: none; transition: color 0.2s; }
         .breadcrumbs a:hover { color: #000000; }
         .breadcrumbs .current { color: #000000; font-weight: 600; }
-        main { flex: 1; padding: 20px 40px 100px 40px; position: relative; }
+        main { flex: 1; padding: 20px 40px 120px 40px; display: flex; flex-direction: column; align-items: center; position: relative; }
         .quake-title {
-            font-family: 'Press Start 2P', monospace; font-size: 36px; line-height: 1.3; color: #ffffff; text-transform: uppercase; user-select: none; margin: 0 0 40px 0; text-align: left; transform: skewX(-10deg); letter-spacing: -2px; display: inline-block;
+            font-family: 'Press Start 2P', monospace; font-size: 36px; line-height: 1.3; color: #ffffff; text-transform: uppercase; user-select: none; margin: 0 0 40px 0; text-align: left; transform: skewX(-10deg); letter-spacing: -2px; display: inline-block; align-self: flex-start;
             text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px 2px 0 #000, -3px 3px 0 #000, -4px 4px 0 #000, -5px 5px 0 #000, -6px 6px 0 #000, -7px 7px 0 #000, -8px 8px 0 #000, -9px 9px 0 #000, -10px 10px 15px rgba(0,0,0,0.4);
             animation: quakePulse 2s infinite ease-in-out;
         }
@@ -25,33 +26,141 @@
             0%, 100% { color: #ffffff; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px 2px 0 #000, -4px 4px 0 #000, -6px 6px 0 #000, -8px 8px 0 #000, -10px 10px 15px rgba(0,0,0,0.3); }
             50% { color: #e5e5e5; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, -2px 2px 0 #000, -5px 5px 0 #333, -8px 8px 0 #111, -11px 11px 20px rgba(0,0,0,0.5); }
         }
-        .content-body { max-width: 800px; text-align: left; font-size: 18px; line-height: 1.6; color: #333333; margin-top: 20px; animation: fadeIn 0.4s ease forwards; }
+        .calc-title { font-size: 20px; font-weight: 700; color: #000000; text-align: center; margin: 0 0 20px 0; letter-spacing: -0.5px; }
+        .calc-container { width: 100%; max-width: 480px; margin: 20px auto 50px auto; padding: 25px; border: 4px solid #000000; border-radius: 2px; background: #ffffff; box-shadow: 0 15px 30px rgba(0,0,0,0.05); box-sizing: border-box; }
+        .calc-group { margin-bottom: 18px; display: flex; flex-direction: column; gap: 6px; text-align: left; }
+        .calc-group label { font-size: 13px; font-weight: 600; }
+        .calc-row { display: flex; gap: 12px; }
+        .calc-row .calc-group { flex: 1; }
+        .calc-input { padding: 10px; border: 2px solid #000000; border-radius: 2px; font-size: 15px; font-family: inherit; box-sizing: border-box; width: 100%; }
+        .calc-radio-group { display: flex; gap: 10px; }
+        .calc-radio-label { flex: 1; text-align: center; padding: 10px; border: 2px solid #000000; border-radius: 2px; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+        .calc-radio-input { display: none; }
+        .calc-radio-input:checked + .calc-radio-label { background: #000000; color: #ffffff; }
+        .calc-btn { width: 100%; padding: 12px; background: #000000; color: #ffffff; border: none; font-family: 'Press Start 2P', monospace; font-size: 11px; cursor: pointer; transform: skewX(-5deg); margin-top: 5px; }
+        .calc-results { margin-top: 25px; padding-top: 20px; border-top: 2px dashed #000000; display: none; flex-direction: column; gap: 12px; text-align: left; }
+        .result-item { display: flex; justify-content: space-between; font-size: 15px; }
+        .result-item span:last-child { font-weight: 700; }
+        .result-item.highlight span:last-child { font-family: 'Press Start 2P', monospace; font-size: 12px; }
+        .content-body { width: 100%; max-width: 800px; text-align: left; font-size: 18px; line-height: 1.6; color: #333333; animation: fadeIn 0.4s ease forwards; }
+        .seo-article { margin-top: 40px; border-top: 1px solid #eeeeee; padding-top: 30px; }
+        .seo-article h2 { font-size: 22px; color: #000000; margin-bottom: 15px; }
+        .seo-article h3 { font-size: 18px; color: #000000; margin-top: 25px; margin-bottom: 10px; }
+        .seo-article p { font-size: 16px; color: #444444; margin-bottom: 15px; }
+        .seo-article ul { font-size: 16px; color: #444444; padding-left: 20px; margin-bottom: 15px; }
+        .seo-article li { margin-bottom: 8px; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .back-btn { position: fixed; bottom: 10px; left: 10px; margin: 0; padding: 10px; color: #000000; text-decoration: none; font-size: 14px; font-weight: 500; opacity: 0.5; transition: opacity 0.2s ease; z-index: 20; background: rgba(255,255,255,0.9); border-radius: 4px; }
         .back-btn:hover { opacity: 1; }
         @media (max-width: 768px) {
-            .top-bar { padding: 20px; justify-content: center; text-align: center; }
-            main { padding: 10px 20px 80px 20px; }
-            .quake-title { font-size: 24px; letter-spacing: -1px; margin-bottom: 25px; }
+            .top-bar { padding: 20px; justify-content: center; }
+            main { padding: 10px 20px 100px 20px; }
+            .quake-title { font-size: 24px; letter-spacing: -1px; margin-bottom: 25px; align-self: center; }
             .content-body { font-size: 16px; }
+            .seo-article h2 { font-size: 18px; }
+            .seo-article h3 { font-size: 16px; }
             .back-btn { width: calc(100% - 40px); left: 10px; right: 10px; text-align: center; box-shadow: 0 -5px 15px rgba(0,0,0,0.05); }
+            .calc-title { font-size: 16px; }
+            .calc-container { padding: 15px; margin-bottom: 40px; }
+            .calc-row { flex-direction: column; gap: 0; }
+            .result-item { flex-direction: column; gap: 4px; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+            .result-item span:last-child { align-self: flex-end; }
         }
     </style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Калькулятор концентрации алкоголя онлайн",
+      "url": "https://urealismo.ru",
+      "description": "Интерактивный калькулятор для расчета уровня промилле алкоголя в крови, калорийности напитков и времени протрезвления по формуле Видмарка.",
+      "applicationCategory": "EducationalApplication, HealthApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "author": {
+        "@type": "Organization",
+        "name": "Уютная Лавка Рыжкина"
+      }
+    }
+    </script>
 </head>
 <body>
     <div class="top-bar">
         <div class="breadcrumbs">
-            <a href="../../">Уютная Лавка Рыжкина</a> — 
-            <a href="../../vhodnaya-gruppa/">Входная группа</a> — 
-            <span class="current">Алкоголь</span>
+            <a href="../../">Уютная Лавка Рыжкина</a> — <a href="../../vhodnaya-gruppa/">Входная группа</a> — <span class="current">Алкоголь</span>
         </div>
     </div>
     <main>
         <h1 class="quake-title">Алкоголь</h1>
+        <div class="calc-container">
+            <h2 class="calc-title">Калькулятор концентрации алкоголя</h2>
+            <div class="calc-group">
+                <label>Пол</label>
+                <div class="calc-radio-group">
+                    <input type="radio" name="gender" id="male" value="male" class="calc-radio-input" checked>
+                    <label for="male" class="calc-radio-label">Мужчина</label>
+                    <input type="radio" name="gender" id="female" value="female" class="calc-radio-input">
+                    <label for="female" class="calc-radio-label">Женщина</label>
+                </div>
+            </div>
+            <div class="calc-row">
+                <div class="calc-group"><label for="age">Возраст (лет)</label><input type="number" id="age" class="calc-input" min="18" max="100" value="25"></div>
+                <div class="calc-group"><label for="weight">Вес (кг)</label><input type="number" id="weight" class="calc-input" min="30" max="250" value="75"></div>
+            </div>
+            <div class="calc-row">
+                <div class="calc-group"><label for="height">Рост (см)</label><input type="number" id="height" class="calc-input" min="100" max="250" value="175"></div>
+                <div class="calc-group"><label for="volume">Объем (мл)</label><input type="number" id="volume" class="calc-input" min="10" max="10000" value="500"></div>
+            </div>
+            <div class="calc-group"><label for="strength">Крепость (%)</label><input type="number" id="strength" class="calc-input" min="0.1" max="96" step="0.1" value="5"></div>
+            <button class="calc-btn" onclick="calc()">Рассчитать</button>
+            <div class="calc-results" id="results">
+                <div class="result-item"><span>Энергетическая ценность:</span><span id="res-kcal">0 ккал</span></div>
+                <div class="result-item"><span>Концентрация алкоголя:</span><span id="res-promille">0.00 ‰</span></div>
+                <div class="result-item highlight"><span>Выведется через:</span><span id="res-time">0 ч. 00 мин.</span></div>
+            </div>
+        </div>
         <div class="content-body">
             <p>Раздел, посвящённый культуре ответственного пития, честным обзорам на напитки, истории винокурения и барной эстетике.</p>
+            <article class="seo-article">
+                <h2>Как работает калькулятор выведения алкоголя из организма?</h2>
+                <p>Данный инструмент осуществляет расчет прогнозируемой концентрации этанола в крови и тканях, опираясь на фундаментальный судебно-медицинский стандарт — математическую формулу шведского исследователя Эрика Видмарка. Алгоритм учитывает базовые физиологические и антропометрические параметры человека, позволяя получить объективную математическую модель метаболизма спирта.</p>
+                <h3>Основные этапы и принципы вычислений:</h3>
+                <ul>
+                    <li><strong>Масса чистого этанола:</strong> Объём употреблённого напитка пересчитывается в граммы чистого спирта с поправкой на физическую плотность этанола, составляющую примерно 0,789 г/мл.</li>
+                    <li><strong>Фактор распределения жидкости (r):</strong> Алкоголь удерживается водными средами организма. Ввиду физиологических особенностей, средний коэффициент распределения для мужчин составляет 0,68, а для женщин — 0,55, что напрямую влияет на итоговый показатель промилле (‰).</li>
+                    <li><strong>Дефицит всасывания:</strong> Алгоритм учитывает естественную потерю около 10% алкоголя, который утилизируется слизистыми оболочками ЖКТ ещё до поступления в кровеносное русло.</li>
+                    <li><strong>Естественная элиминация:</strong> Выведение токсинов осуществляется печенью с постоянной линейной скоростью. Принятый клинический стандарт утилизации составляет в среднем 0,15 ‰/час у мужчин и 0,13 ‰/час у женщин.</li>
+                </ul>
+                <p>Важно помнить: полученное время указывает на момент полной биохимической очистки организма до 0.00 ‰. Субъективное ощущение протрезвления и восстановление когнитивных функций наступают значительно раньше — при снижении концентрации ниже границы в 0.3 ‰. Расчеты носят ознакомительный характер.</p>
+            </article>
         </div>
         <a href="../../vhodnaya-gruppa/" class="back-btn">← Вернуться ко входной группе</a>
     </main>
+    <script>
+        function calc() {
+            const age = parseInt(document.getElementById('age').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const volume = parseFloat(document.getElementById('volume').value);
+            const strength = parseFloat(document.getElementById('strength').value);
+            const isMale = document.getElementById('male').checked;
+            if (isNaN(age) || age < 18 || age > 100 || isNaN(weight) || weight <= 0 || isNaN(height) || height <= 0 || isNaN(volume) || volume <= 0 || isNaN(strength) || strength <= 0) {
+                alert('Введите корректные данные (от 18 лет).'); return;
+            }
+            const grams = volume * (strength / 100) * 0.789;
+            const kcal = Math.round(grams * 7.1);
+            const r = isMale ? 0.68 : 0.55;
+            let promille = (grams / (weight * r)) * 0.9;
+            if (promille < 0) promille = 0;
+            const rate = isMale ? 0.15 : 0.13;
+            const totalHours = promille / rate;
+            const h = Math.floor(totalHours);
+            const m = Math.round((totalHours - h) * 60);
+            document.getElementById('res-kcal').innerText = kcal + ' ккал';
+            document.getElementById('res-promille').innerText = promille.toFixed(2) + ' ‰';
+            document.getElementById('res-time').innerText = promille === 0 ? '0 ч. 00 мин.' : h + ' ч. ' + (m < 10 ? '0' : '') + m + ' мин.';
+            document.getElementById('results').style.display = 'flex';
+        }
+    </script>
 </body>
 </html>
