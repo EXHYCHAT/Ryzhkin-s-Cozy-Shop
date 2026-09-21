@@ -2,8 +2,15 @@ document.addEventListener("DOMContentLoaded", function() {
     (function(m,e,t,r,i,k,a){
         m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
         m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t),k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+        k=e.createElement(t);
+        a=e.getElementsByTagName(t)[0];
+        k.async=1;
+        k.src=r;
+        if (a && a.parentNode) {
+            a.parentNode.insertBefore(k,a);
+        } else {
+            e.head.appendChild(k);
+        }
     })(window, document,'script','https://yandex.ru', 'ym');
 
     ym(112867009, 'init', {
@@ -17,12 +24,12 @@ document.addEventListener("DOMContentLoaded", function() {
         trackLinks: true
     });
 
-    const noscript = document.createElement('noscript');
+    var noscript = document.createElement('noscript');
     noscript.innerHTML = '<div><img src="https://yandex.ru" style="position:absolute; left:-9999px;" alt="" /></div>';
     document.body.appendChild(noscript);
 
     if (!localStorage.getItem("cookie_accepted")) {
-        const style = document.createElement('style');
+        var style = document.createElement('style');
         style.innerHTML = `
             .cookie-banner { position: fixed; bottom: 140px; left: 50%; transform: translateX(-50%); width: calc(100% - 80px); max-width: 600px; background: #ffffff; border: 4px solid #000000; box-shadow: 0 0 0 4px #ffffff, 0 15px 30px rgba(0,0,0,0.15); padding: 15px 25px; box-sizing: border-box; display: flex; justify-content: space-between; align-items: center; gap: 20px; z-index: 100; }
             .cookie-text { font-family: 'Press Start 2P', monospace; font-size: 10px; line-height: 1.5; color: #000000; margin: 0; text-transform: uppercase; }
@@ -37,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function() {
         `;
         document.head.appendChild(style);
 
-        const banner = document.createElement('div');
+        var banner = document.createElement('div');
         banner.className = 'cookie-banner';
         banner.id = 'cookieBanner';
         banner.innerHTML = `
