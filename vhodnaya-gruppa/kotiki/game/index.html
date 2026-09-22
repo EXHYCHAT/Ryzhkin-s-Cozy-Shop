@@ -3,15 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Дворовый Забег Котика С Вашего Двора</title>
+    <title>Дворовый Забег Котика С Вашего Двора — Уютная Лавка Рыжкина</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://googleapis.com/css2?family=Press+Start+2P&amp;display=swap" rel="stylesheet">
     <style>
         body { background: #ffffff; color: #000000; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; margin: 0; min-height: 100vh; display: flex; flex-direction: column; -webkit-font-smoothing: antialiased; }
         .top-header-block { display: flex; flex-direction: column; align-items: flex-start; padding: 30px 40px 10px 40px; width: 100%; box-sizing: border-box; }
         .breadcrumbs { font-size: 14px; color: #888888; font-weight: 500; margin-top: 10px; text-align: left; }
-        .breadcrumbs a { color: #888888; text-decoration: none; }
+        .breadcrumbs a { color: #888888; text-decoration: none; transition: color 0.2s; }
+        .breadcrumbs a:hover { color: #000000; }
         .breadcrumbs .current { color: #000000; font-weight: 600; }
         main { flex: 1; padding: 20px 40px 40px 40px; display: flex; flex-direction: column; gap: 30px; width: 100%; box-sizing: border-box; margin: 0 auto; align-items: center; }
         .quake-title {
@@ -20,11 +22,8 @@
         }
         .game-area-wrapper { width: 100%; max-width: 1100px; display: flex; flex-direction: column; }
         .game-container { width: 100%; height: 350px; border: 4px solid #000000; position: relative; background: #fafafa; overflow: hidden; box-sizing: border-box; touch-action: manipulation; -webkit-user-select: none; user-select: none; }
-        #cat {
-            width: 50px; height: 50px; position: absolute; bottom: 20px; left: 50px; z-index: 2; user-select: none;
-            background-image: url('cat1.png'); background-size: contain; background-repeat: no-repeat; background-position: center;
-        }
-        .obstacle { width: 40px; height: 40px; font-size: 32px; line-height: 40px; text-align: center; position: absolute; bottom: 20px; right: -50px; z-index: 2; user-select: none; }
+        #cat { width: 50px; height: 50px; position: absolute; bottom: 20px; left: 50px; z-index: 2; user-select: none; background-image: url('cat1.png'); background-size: contain; background-repeat: no-repeat; background-position: center; }
+        .obstacle { width: 40px; height: 40px; position: absolute; bottom: 20px; right: -50px; z-index: 2; user-select: none; }
         .ground-line { position: absolute; bottom: 20px; left: 0; width: 100%; height: 4px; background: #000000; z-index: 1; }
         .game-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.95); z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
         .game-overlay h2 { font-family: 'Press Start 2P', monospace; font-size: 14px; text-transform: uppercase; margin-bottom: 20px; text-align: center; }
@@ -50,7 +49,7 @@
             .game-overlay h2 { font-size: 11px; margin-bottom: 10px; }
             .pixel-input { font-size: 10px; padding: 8px; margin-bottom: 10px; }
             #cat { width: 35px; height: 35px; left: 20px; bottom: 12px; }
-            .obstacle { width: 28px; height: 28px; font-size: 22px; line-height: 28px; bottom: 12px; }
+            .obstacle { width: 28px; height: 28px; bottom: 12px; }
             .ground-line { bottom: 12px; }
         }
     </style>
@@ -62,21 +61,17 @@
         <a href="../../../">Уютная Лавка Рыжкина</a> — <a href="../../">Входная группа</a> — <a href="../">#котиксвашегодвора</a> — <span class="current">Поиграться</span>
     </div>
 </div>
-
 <main>
     <div class="game-area-wrapper">
         <div class="live-score">Счёт: <span id="scoreVal">0</span></div>
-        
         <div class="game-container" id="gameContainer">
             <div id="cat"></div>
             <div class="ground-line"></div>
-            
             <div class="game-overlay" id="startScreen">
                 <h2>Регистрация котика</h2>
                 <input type="text" id="playerName" class="pixel-input" placeholder="ИМЯ КОТИКА" maxlength="15">
                 <button class="pixel-btn" id="startBtn">СТАРТ</button>
             </div>
-
             <div class="game-overlay hidden" id="endScreen">
                 <h2>БАМС! Препятствие!</h2>
                 <p style="font-family:'Press Start 2P'; font-size:11px; margin-bottom:20px; text-align:center;">Ваш счёт: <span id="finalScore">0</span></p>
@@ -88,7 +83,6 @@
         </div>
         <p style="font-size: 13px; color: #666; margin-top: 10px; align-self: flex-start;">Управление: <b>Пробел</b>, стрелка <b>Вверх</b> или любой <b>Тап/Клик</b> по экрану игры.</p>
     </div>
-
     <div class="leaderboard-wrapper">
         <h2>ЛУЧШИЕ КОТИКИ ВАШЕГО ДВОРА</h2>
         <ul class="leaderboard-list" id="leaderboardList">
@@ -96,15 +90,12 @@
         </ul>
     </div>
 </main>
-
 <script>
     const SCRIPT_URL = "https://google.com";
-
     const cat = document.getElementById('cat');
     const gameContainer = document.getElementById('gameContainer');
     const scoreVal = document.getElementById('scoreVal');
     const finalScore = document.getElementById('finalScore');
-    
     const startScreen = document.getElementById('startScreen');
     const endScreen = document.getElementById('endScreen');
     const startBtn = document.getElementById('startBtn');
@@ -112,7 +103,6 @@
     const saveAndRestartBtn = document.getElementById('saveAndRestartBtn');
     const playerNameInput = document.getElementById('playerName');
     const leaderboardList = document.getElementById('leaderboardList');
-
     let score = 0;
     let isJumping = false;
     let isPlaying = false;
@@ -121,7 +111,6 @@
     let playerName = "";
     let catRunFrame = 1;
     let catAnimationInterval;
-
     function fetchLeaderboard() {
         const oldScript = document.getElementById('jsonp-leaderboard');
         if (oldScript) oldScript.remove();
@@ -134,7 +123,6 @@
         document.body.appendChild(script);
     }
     fetchLeaderboard();
-
     window.renderLeaderboard = function(data) {
         leaderboardList.innerHTML = "";
         const list = data.leaderboard;
@@ -209,8 +197,13 @@
         
         const obs = document.createElement('div');
         obs.className = 'obstacle';
-        const obsSkins = ['📦', '🪵', '🐕', '🧱'];
-        obs.textContent = obsSkins[Math.floor(Math.random() * obsSkins.length)];
+        
+        const randomObsNum = Math.floor(Math.random() * 3) + 1;
+        obs.style.backgroundImage = "url('obs" + randomObsNum + ".png')";
+        obs.style.backgroundSize = 'contain';
+        obs.style.backgroundRepeat = 'no-repeat';
+        obs.style.backgroundPosition = 'center';
+        
         obs.style.right = '-50px';
         gameContainer.appendChild(obs);
         currentObstacle = obs;
